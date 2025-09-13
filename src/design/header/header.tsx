@@ -1,10 +1,10 @@
-// STICKY_design
-const STICKY_design = () => {
+// STICKY_design_header
+const STICKY_design_header = () => {
   return (
-    <main>
+    <header>
       <h1>STICKY_design</h1>
-    </main>
+    </header>
   );
 };
 
-export default STICKY_design;
+export default STICKY_design_header;
