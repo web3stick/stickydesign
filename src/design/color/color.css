@@ -1,0 +1,8 @@
+.color_palette {
+    width: 900px;
+    height: 200px;
+}
+
+.color_palette .color_palette_color_one {
+    background-color: var(--color-green);
+}
