@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "preact": "^10.27.1",
-    "preact-router": "^4.1.2"
+    "preact-router": "^4.1.2",
+    "prismjs": "^1.30.0"
   },
   "devDependencies": {
     "@rsbuild/core": "^1.5.6",
     "@rsbuild/plugin-preact": "^1.5.2",
+    "@types/prismjs": "^1.26.5",
     "typescript": "^5.9.2"
   }
 }
