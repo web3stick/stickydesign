@@ -1,22 +1,46 @@
+import { useEffect } from "preact/hooks";
+import Prism from "prismjs";
+import "prismjs/themes/prism-okaidia.css";
 
 // import css
 import "./color.css";
-import button_CSS from "./color.css?raw";
+import color_CSS from "../../css/color.css?raw";
 
-// STICKY_design_color
 const STICKY_design_color = () => {
+  
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
+  
+  const colors = [
+    "--color-green",
+    "--color-blue",
+    "--color-red",
+    "--color-yellow",
+    "--color-purple",
+    "--color-orange",
+  ];
+
   return (
     <section>
       <h1>STICKY_color</h1>
       <p>color palette for sticky</p>
-      <div class="color_palette">
-        <div class="color_palette_color_one"></div>
-        <div class="color_palette_color_two"></div>
-        <div class="color_palette_color_three"></div>
-        <div class="color_palette_color_four"></div>
-        <div class="color_palette_color_five"></div>
-        <div class="color_palette_color_six"></div>
+      
+      {/*color_palette*/}
+      <div className="color_palette">
+        {colors.map((color) => (
+          <div
+            key={color}
+            className="color_swatch"
+            style={{ backgroundColor: `var(${color})` }}
+          ></div>
+        ))}
       </div>
+      
+      {/*pre*/}
+      <pre>
+        <code className="language-css">{color_CSS}</code>
+      </pre>
     </section>
   );
 };

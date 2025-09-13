@@ -1,8 +1,18 @@
 .color_palette {
+    display: flex;
     width: 900px;
+    max-width: 90%;
     height: 200px;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 12px;
 }
 
-.color_palette .color_palette_color_one {
-    background-color: var(--color-green);
+.color_swatch {
+    flex: 1;
+    padding: 0px;
+}
+
+pre {
+    padding: 0px !important;
 }
