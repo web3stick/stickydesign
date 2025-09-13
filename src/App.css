@@ -7,3 +7,20 @@ body, main {
 body {
     font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
 }
+
+header, section {
+    min-height: 100vh;
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  
+    padding: 20px;
+    margin: 0px;
+}
+
+footer {
+    text-align: center;
+}
