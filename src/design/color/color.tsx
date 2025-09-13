@@ -38,7 +38,7 @@ const STICKY_design_color = () => {
       </div>
       
       {/*pre*/}
-      <pre>
+      <pre class="color_pre">
         <code className="language-css">{color_CSS}</code>
       </pre>
     </section>
