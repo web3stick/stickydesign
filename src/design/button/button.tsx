@@ -1,8 +1,11 @@
+// import css
+import "./button.css";
+
 // STICKY_design_button
 const STICKY_design_button = () => {
   return (
     <section>
-      <h1>STICKY_button</h1>
+      <button>STICKY_button</button>
     </section>
   );
 };

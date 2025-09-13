@@ -7,9 +7,9 @@ footer {
 footer nav a {
     margin: 5px;
     text-decoration: none;
-    color: #8CA2F5;
+    color: var(--color-blue);
 }
 
 footer nav a:hover {
-    color: #C9A8F4;
+    color: var(--color-purple);
 }
