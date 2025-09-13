@@ -4,7 +4,7 @@ import "prismjs/themes/prism-okaidia.css";
 
 // import css
 import "./button.css";
-import buttonCSS from "./button.css?raw";
+import button_CSS from "./button.css?raw";
 
 // STICKY_design_button
 const STICKY_design_button = () => {
@@ -17,7 +17,7 @@ const STICKY_design_button = () => {
       <button>STICKY_button</button>
 
       <pre>
-        <code className="language-css">{buttonCSS}</code>
+        <code className="language-css">{button_CSS}</code>
       </pre>
     </section>
   );
