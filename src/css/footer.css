@@ -1,0 +1,10 @@
+/* footer */
+
+footer {
+    text-align: center;
+}
+
+footer nav a {
+    margin: 5px;
+    text-decoration: none;
+}

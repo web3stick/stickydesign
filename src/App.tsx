@@ -2,7 +2,7 @@
 import { Router, Route } from "preact-router";
 
 // import css
-import "./css/App.css";
+import "./css/main.css";
 
 // import ts
 import "./ts/hello.ts";
