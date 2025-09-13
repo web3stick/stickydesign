@@ -6,6 +6,7 @@
 bun i
 bun run dev
 bun run build
+bun tsc --noEmit
 
 
 # web4 deploy
