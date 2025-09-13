@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rsbuild build",
     "dev": "rsbuild dev --open",
-    "preview": "rsbuild preview"
+    "preview": "rsbuild preview",
+    "web4_mainnet": "web4-deploy dist stickydesign.near --nearfs"
   },
   "dependencies": {
     "preact": "^10.27.1"
