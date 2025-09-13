@@ -12,6 +12,7 @@ import { ROUTES } from "./ts/routes.ts";
 // design
 import STICKY_design_header from "./design/header.tsx";
 import STICKY_design_color from "./design/color/color.tsx";
+import STICKY_design_button from "./design/button/button.tsx";
 import STICKY_design_footer from "./design/footer.tsx";
 
 
@@ -22,6 +23,7 @@ const App = () => {
       <Router>
         <Route path={ROUTES.home.path} component={STICKY_design_header} />
         <Route path={ROUTES.color.path} component={STICKY_design_color} />
+        <Route path={ROUTES.button.path} component={STICKY_design_button} />
       </Router>
       <STICKY_design_footer/>
     </main>
