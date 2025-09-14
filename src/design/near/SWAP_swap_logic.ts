@@ -213,8 +213,8 @@ export async function fetchSwapQuote(
     }
 
     const [inputPrice, outputPrice] = await Promise.all([
-      fetchTokenPrice(tokenIn),
-      fetchTokenPrice(tokenOut),
+      fetchTokenPrice(tokenIn === "near" ? "wrap.near" : tokenIn),
+      fetchTokenPrice(tokenOut === "near" ? "wrap.near" : tokenOut),
     ]);
 
     const bestRoute = data[0];
@@ -291,7 +291,7 @@ export async function prepareSwapToken(
     if (simpleToken.isNative && simpleToken.contract_id === "near") {
       const [metadata, priceUsd] = await Promise.all([
         Promise.resolve(NATIVE_NEAR_TOKEN.metadata),
-        fetchTokenPrice("wrap.near"),
+        fetchTokenPrice("wrap.near"), // Use wrap.near for price fetching
       ]);
       
       // Only fetch balance if we have an account ID

@@ -52,7 +52,7 @@ export async function getNativeNearBalance(accountId: string): Promise<string> {
   
   try {
     console.log("Fetching native NEAR balance for:", accountId);
-    const account = await window.near.queryAccount({
+    const account = await near.queryAccount({
       accountId: accountId,
     });
 
