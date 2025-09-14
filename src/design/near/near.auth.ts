@@ -30,11 +30,28 @@ export function useFastIntearAuth(): {
     // Check auth status on mount
     checkAuthStatus();
 
-    // Set up an interval to check auth status periodically
-    const interval = setInterval(checkAuthStatus, 1000);
+    // Listen for wallet events (if available)
+    // This is a simplified approach - in a real app you might listen to specific wallet events
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        checkAuthStatus();
+      }
+    };
 
-    // Clean up interval on unmount
-    return () => clearInterval(interval);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Also check when the window regains focus
+    const handleFocus = () => {
+      checkAuthStatus();
+    };
+    
+    window.addEventListener('focus', handleFocus);
+
+    // Clean up listeners on unmount
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleFocus);
+    };
   }, []);
 
   const login = async () => {
