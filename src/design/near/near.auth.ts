@@ -12,46 +12,19 @@ export function useFastIntearAuth(): {
   const [auth, setAuth] = useState<AuthState>({ loggedIn: false });
 
   useEffect(() => {
-    const checkAuthStatus = () => {
-      const status = near.authStatus();
-      console.log('[FastINTEAR] Auth status check:', status);
+    // Only check auth status on mount
+    const status = near.authStatus();
+    console.log('[FastINTEAR] Initial auth status check:', status);
 
-      if (status === 'SignedIn') {
-        const accountId = near.accountId();
-        console.log('[FastINTEAR] Detected signed-in account:', accountId);
-        if (accountId) {
-          setAuth({ loggedIn: true, accountId });
-        }
-      } else {
-        setAuth({ loggedIn: false });
+    if (status === 'SignedIn') {
+      const accountId = near.accountId();
+      console.log('[FastINTEAR] Detected signed-in account:', accountId);
+      if (accountId) {
+        setAuth({ loggedIn: true, accountId });
       }
-    };
-
-    // Check auth status on mount
-    checkAuthStatus();
-
-    // Listen for wallet events (if available)
-    // This is a simplified approach - in a real app you might listen to specific wallet events
-    const handleVisibilityChange = () => {
-      if (!document.hidden) {
-        checkAuthStatus();
-      }
-    };
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    
-    // Also check when the window regains focus
-    const handleFocus = () => {
-      checkAuthStatus();
-    };
-    
-    window.addEventListener('focus', handleFocus);
-
-    // Clean up listeners on unmount
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('focus', handleFocus);
-    };
+    } else {
+      setAuth({ loggedIn: false });
+    }
   }, []);
 
   const login = async () => {
@@ -67,7 +40,10 @@ export function useFastIntearAuth(): {
   const logout = () => {
     console.log('[FastINTEAR] Logging out...');
     near.signOut();
+    
+    // Immediately update the state and don't rely on near.authStatus()
     setAuth({ loggedIn: false });
+    
     console.log('[FastINTEAR] Logged out.');
   };
 

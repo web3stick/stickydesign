@@ -21,6 +21,9 @@ import { TokenDropdown } from "./SWAP_TokenDropdown";
 export const Swap = () => {
   const { auth } = useFastIntearAuth();
   const accountId = auth.loggedIn ? auth.accountId : null;
+  
+  // Debug auth state
+  console.log('Swap auth state:', auth, 'accountId:', accountId);
 
   const [availableTokens, setAvailableTokens] = useState<SimpleToken[]>([]);
   const [selectedTokenIn, setSelectedTokenIn] = useState<SwapToken | null>(
@@ -46,18 +49,19 @@ export const Swap = () => {
     loadAvailableTokens();
   }, []);
 
-  // Refresh token balances when user logs in/out
+  // Refresh tokens when user logs in/out
   useEffect(() => {
-    // If we have tokens selected, refresh them with account info
-    if (accountId && selectedTokenIn) {
-      selectToken(selectedTokenIn, "in");
-    }
-    if (accountId && selectedTokenOut) {
-      selectToken(selectedTokenOut, "out");
-    }
-    // If we don't have tokens loaded yet but now have an account, load them
-    if (accountId && !selectedTokenIn && !selectedTokenOut) {
+    console.log('Account ID changed in effect:', accountId);
+    if (accountId) {
+      // User logged in - load/refresh tokens
       loadAvailableTokens();
+    } else if (accountId === null && (selectedTokenIn || selectedTokenOut)) {
+      // User logged out - reset tokens
+      console.log('User logged out, resetting tokens');
+      setSelectedTokenIn(null);
+      setSelectedTokenOut(null);
+      setQuote(null);
+      setInputAmount("");
     }
   }, [accountId]);
 
