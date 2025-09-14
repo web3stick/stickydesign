@@ -119,6 +119,7 @@ export const SwapUI = ({}: SwapUIProps) => {
 
     try {
       // Only fetch balance if user is logged in
+      // Use accountId from the store instead of the prop
       const swapToken = await prepareSwapToken(simpleToken, accountId || "");
       if (type === "in") {
         setSelectedTokenIn(swapToken);
@@ -233,6 +234,7 @@ export const SwapUI = ({}: SwapUIProps) => {
         ? "near"
         : selectedTokenIn.contract_id;
 
+      // Use accountId from the store instead of the prop
       const quoteData = await fetchSwapQuote(
         tokenIn,
         selectedTokenOut.contract_id,
@@ -250,6 +252,7 @@ export const SwapUI = ({}: SwapUIProps) => {
   };
 
   const handleSwap = async () => {
+    // Use accountId from the store instead of the prop
     if (
       !selectedTokenIn ||
       !selectedTokenOut ||
@@ -263,6 +266,7 @@ export const SwapUI = ({}: SwapUIProps) => {
       tokenIn: selectedTokenIn.isNative ? "near" : selectedTokenIn.contract_id,
       tokenOut: selectedTokenOut.contract_id,
       amountIn: toRawAmount(inputAmount, selectedTokenIn.metadata.decimals),
+      // Use accountId from the store instead of the prop
       accountId,
       slippageTolerance: slippage,
     };
@@ -325,6 +329,7 @@ export const SwapUI = ({}: SwapUIProps) => {
         <div className="swap-input-group">
           <div className="swap-input-header">
             <span className="swap-input-label">From</span>
+            {/* Use accountId from the store instead of the prop */}
             {selectedTokenIn && accountId && (
               <button
                 type="button"
@@ -340,6 +345,7 @@ export const SwapUI = ({}: SwapUIProps) => {
             )}
           </div>
 
+          {/* Use accountId from the store instead of the prop */}
           {selectedTokenIn && accountId && (
             <div className="swap-percentage-buttons">
               <button 
@@ -530,6 +536,7 @@ export const SwapUI = ({}: SwapUIProps) => {
             !inputAmount ||
             parseFloat(inputAmount) <= 0 ||
             !quote ||
+            // Use accountId from the store instead of the prop
             !accountId
           }
         >

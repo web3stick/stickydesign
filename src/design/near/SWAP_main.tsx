@@ -2,15 +2,24 @@ import { useSwapAuth } from "./SWAP_auth";
 import SWAP_AUTH_BUTTON from "./SWAP_auth_button";
 import { SwapUI } from "./SWAP_ui";
 import { useEffect } from "preact/hooks";
+import { useSwapStore } from "./swapStore";
 
 export const Swap = () => {
   const { auth } = useSwapAuth();
-  const accountId = auth.loggedIn ? auth.accountId : null;
+  // We no longer need to derive accountId here since it's managed by the store
+  // But we still need to update the store when auth changes
+  const setStoreAccountId = useSwapStore((state) => state.setAccountId);
+  
+  // Update the store's accountId when auth changes
+  useEffect(() => {
+    console.log('[SWAP_MAIN] Auth state changed, updating store:', auth);
+    setStoreAccountId(auth.loggedIn ? auth.accountId : null);
+  }, [auth, setStoreAccountId]);
 
   // Simple key that changes on auth state to force complete re-render
   const componentKey = auth.loggedIn ? `logged-in-${auth.accountId}` : 'logged-out';
   
-  console.log('[SWAP_MAIN] Render with auth state:', auth, 'accountId:', accountId, 'key:', componentKey);
+  console.log('[SWAP_MAIN] Render with auth state:', auth, 'key:', componentKey);
 
   // Add a useEffect to log when the component mounts/unmounts
   useEffect(() => {
@@ -29,7 +38,7 @@ export const Swap = () => {
         
         <SWAP_AUTH_BUTTON />
         
-        <SwapUI accountId={accountId} />
+        <SwapUI />
       </div>
     </div>
   );
