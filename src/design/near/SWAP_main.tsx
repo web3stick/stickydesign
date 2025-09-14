@@ -17,7 +17,7 @@ import {
   selectRoute,
   toRawAmount,
   validateSwapParams,
-} from '../../ts/swap';
+} from './SWAP_swap_logic';
 
 export const Swap = () => {
   const [accountId, setAccountId] = useState<string>('');
