@@ -46,6 +46,30 @@ export const Swap = () => {
     loadAvailableTokens();
   }, []);
 
+  // Refresh token balances when user logs in/out
+  useEffect(() => {
+    console.log("Account ID changed:", accountId);
+    console.log("Selected tokens:", selectedTokenIn?.displayName, selectedTokenOut?.displayName);
+    
+    // If we have tokens selected, refresh them with account info
+    if (accountId && accountId !== "null" && (selectedTokenIn || selectedTokenOut)) {
+      // Refresh the selected tokens with the new account info
+      if (selectedTokenIn) {
+        console.log("Refreshing selected token in");
+        selectToken(selectedTokenIn, "in");
+      }
+      if (selectedTokenOut) {
+        console.log("Refreshing selected token out");
+        selectToken(selectedTokenOut, "out");
+      }
+    }
+    // If we don't have tokens loaded yet but now have an account, load them
+    else if (accountId && accountId !== "null" && !selectedTokenIn && !selectedTokenOut) {
+      console.log("Loading tokens after login");
+      loadAvailableTokens();
+    }
+  }, [accountId]);
+
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = () => {
@@ -62,6 +86,7 @@ export const Swap = () => {
   }, [isDropdownOpenIn, isDropdownOpenOut]);
 
   const loadAvailableTokens = async () => {
+    console.log("Loading available tokens, account ID:", accountId);
     setIsLoadingTokens(true);
     const tokens = await getAvailableTokens();
     setAvailableTokens(tokens);
@@ -71,6 +96,7 @@ export const Swap = () => {
       // Set NEAR as the default "from" token
       const nearToken = tokens.find((t) => t.isNative);
       if (nearToken) {
+        console.log("Selecting initial NEAR token");
         selectToken(nearToken, "in");
       }
       
@@ -79,6 +105,7 @@ export const Swap = () => {
         (t) => t.contract_id === "shit-1170.meme-cooking.near",
       );
       if (shitToken) {
+        console.log("Selecting initial SHIT token");
         selectToken(shitToken, "out");
       } else if (!shitToken && !nearToken) {
         // Fallback to first available token if neither is found
@@ -91,6 +118,8 @@ export const Swap = () => {
   };
 
   const selectToken = async (simpleToken: SimpleToken, type: "in" | "out") => {
+    console.log("Selecting token:", simpleToken.displayName, "Type:", type, "Account ID:", accountId);
+    
     if (type === "in") {
       setIsLoadingTokenIn(true);
     } else {
@@ -100,6 +129,8 @@ export const Swap = () => {
     try {
       // Only fetch balance if user is logged in
       const swapToken = await prepareSwapToken(simpleToken, accountId || "");
+      console.log("Prepared swap token:", swapToken.displayName, "Balance:", swapToken.actualBalance);
+      
       if (type === "in") {
         setSelectedTokenIn(swapToken);
       } else {
