@@ -1,6 +1,6 @@
-import { CONFIG, DOGSHIT_TOKEN } from './config';
+import { CONFIG, DOGSHIT_TOKEN } from './NEAR_config';
 import { fetchUserTokens, type UserToken } from './profile_token-list';
-import { NATIVE_NEAR_TOKEN, getNativeNearBalance } from './token-definitions';
+import { NATIVE_NEAR_TOKEN, getNativeNearBalance } from './SWAP_token-definitions';
 // import * as near from "fastintear";
 
 export interface TokenMetadata {
