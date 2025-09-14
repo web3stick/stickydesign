@@ -267,7 +267,6 @@ export const Swap = () => {
                     <TokenIcon
                       icon={selectedTokenIn.metadata?.icon}
                       symbol={selectedTokenIn.displayName}
-                      size="medium"
                     />
                     {selectedTokenIn.displayName}
                   </>
@@ -323,7 +322,6 @@ export const Swap = () => {
                     <TokenIcon
                       icon={selectedTokenOut.metadata?.icon}
                       symbol={selectedTokenOut.displayName}
-                      size="medium"
                     />
                     {selectedTokenOut.displayName}
                   </>

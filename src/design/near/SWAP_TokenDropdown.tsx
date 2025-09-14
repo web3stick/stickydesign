@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'preact/hooks';
-import type { SimpleToken } from './SWAP_swap_logic';
-import { TokenIcon } from './SWAP_TokenIcon';
+import { useState, useMemo } from "preact/hooks";
+import type { SimpleToken } from "./SWAP_swap_logic";
+import { TokenIcon } from "./SWAP_TokenIcon";
 
 interface TokenDropdownProps {
   tokens: SimpleToken[];
@@ -9,8 +9,13 @@ interface TokenDropdownProps {
   onClose: () => void;
 }
 
-export const TokenDropdown = ({ tokens, onSelect, isOpen, onClose }: TokenDropdownProps) => {
-  const [searchTerm, setSearchTerm] = useState('');
+export const TokenDropdown = ({
+  tokens,
+  onSelect,
+  isOpen,
+  onClose,
+}: TokenDropdownProps) => {
+  const [searchTerm, setSearchTerm] = useState("");
 
   const filteredTokens = useMemo(() => {
     if (!searchTerm) {
@@ -47,14 +52,14 @@ export const TokenDropdown = ({ tokens, onSelect, isOpen, onClose }: TokenDropdo
               onClose();
             }}
           >
-            <TokenIcon
-              icon={token.metadata?.icon}
-              symbol={token.displayName}
-              size="small"
-            />
+            <TokenIcon icon={token.metadata?.icon} symbol={token.displayName} />
             <div className="token-dropdown-item-info">
-              <div className="token-dropdown-item-symbol">{token.displayName}</div>
-              <div className="token-dropdown-item-name">{token.metadata?.name}</div>
+              <div className="token-dropdown-item-symbol">
+                {token.displayName}
+              </div>
+              <div className="token-dropdown-item-name">
+                {token.metadata?.name}
+              </div>
             </div>
           </div>
         ))}

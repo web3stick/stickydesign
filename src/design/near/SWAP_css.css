@@ -6,9 +6,6 @@
     --border-color: #e9ecef;
     --accent-color: #007bff;
 }
-button {
-    color: black
-}
 
 .swap-page {
     display: flex;
@@ -69,10 +66,32 @@ button {
     cursor: pointer;
 }
 
-.swap-token-selector .token-icon {
+.token-icon {
     width: 24px;
     height: 24px;
     margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.token-icon-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.token-icon-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: var(--container-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
 }
 
 .token-dropdown-menu {
@@ -80,7 +99,7 @@ button {
     background-color: var(--container-background);
     border: 1px solid var(--border-color);
     border-radius: 4px;
-    width: calc(100% - 2rem);
+    width: calc(100% - 4rem);
     max-height: 300px;
     overflow-y: auto;
     z-index: 1000;
@@ -116,8 +135,8 @@ button {
 }
 
 .token-dropdown-item .token-icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     margin-right: 0.5rem;
 }
 
@@ -133,12 +152,6 @@ button {
 .token-dropdown-item-name {
     font-size: 0.875rem;
     color: var(--secondary-text-color);
-}
-
-.token-dropdown-item .token-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 0.5rem;
 }
 
 .swap-amount-input {
