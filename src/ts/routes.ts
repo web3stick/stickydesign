@@ -3,6 +3,7 @@ export const ROUTES = {
     home: { path: '/', label: 'HEADER' },
     color: { path: '/color', label: 'COLOR' },
     button: { path: '/button', label: 'BUTTON' },
+    near: { path: '/near', label: 'NEAR' },
     // footer: { path: '/footer', label: 'FOOTER' },
   } as const;
   
