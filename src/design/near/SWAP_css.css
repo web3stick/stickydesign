@@ -5,6 +5,17 @@
     --secondary-text-color: #6c757d;
     --border-color: #e9ecef;
     --accent-color: #007bff;
+    /* Using color variables from main color.css */
+    --color-green: #95D58D;
+    --color-purple: #C9A8F4;
+    --color-yellow: #FFF8A3;
+    --color-blue: #8CA2F5;
+    --color-red: #FF8A8A;
+    --color-orange: #FFC58A;
+    /* Additional custom colors for swap component */
+    --swap-primary: var(--color-purple);
+    --swap-secondary: var(--color-yellow);
+    --swap-accent: var(--color-green);
 }
 
 .swap-page {
@@ -21,6 +32,7 @@
     width: 100%;
     max-width: 480px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--swap-secondary);
 }
 
 .swap-header {
@@ -45,6 +57,7 @@
     padding: 1rem;
     border-radius: 8px;
     border: 1px solid var(--border-color);
+    position: relative; /* Ensure proper positioning context */
 }
 
 .swap-input-header {
@@ -64,6 +77,13 @@
     border-radius: 4px;
     background-color: var(--container-background);
     cursor: pointer;
+    color: var(--swap-primary); /* Changed to purple to differentiate from other buttons */
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.swap-token-selector:hover {
+    border-color: var(--swap-secondary);
 }
 
 .token-icon {
@@ -94,17 +114,8 @@
     font-weight: 600;
 }
 
-.token-dropdown-menu {
-    position: absolute;
-    background-color: var(--container-background);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    width: calc(100% - 4rem);
-    max-height: 300px;
-    overflow-y: auto;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
+.token-dropdown {
+    position: relative;
 }
 
 .token-dropdown-search {
@@ -126,8 +137,13 @@
 .token-dropdown-item {
     display: flex;
     align-items: center;
-    padding: 0.5rem;
+    padding: 0.75rem 0.5rem;
     cursor: pointer;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.token-dropdown-item:last-child {
+    border-bottom: none;
 }
 
 .token-dropdown-item:hover {
@@ -147,11 +163,28 @@
 
 .token-dropdown-item-symbol {
     font-weight: 600;
+    color: var(--text-color);
 }
 
 .token-dropdown-item-name {
     font-size: 0.875rem;
     color: var(--secondary-text-color);
+}
+
+.token-dropdown-menu {
+    position: absolute;
+    background-color: var(--container-background);
+    border: 1px solid var(--swap-secondary);
+    border-radius: 4px;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    top: 100%;
+    left: 0;
+    margin-top: 0.25rem;
 }
 
 .swap-amount-input {
@@ -167,6 +200,28 @@
 .swap-arrow-container {
     display: flex;
     justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.swap-arrow-button {
+    background-color: var(--container-background);
+    border: 2px solid var(--swap-secondary);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--swap-primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.swap-arrow-button:hover {
+    transform: scale(1.1);
 }
 
 .swap-settings {
@@ -175,4 +230,44 @@
     align-items: center;
     font-size: 0.875rem;
     color: var(--secondary-text-color);
+}
+
+.swap-button {
+    background-color: var(--swap-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.swap-button:hover:not(:disabled) {
+    background-color: var(--color-blue);
+}
+
+.swap-button:disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+}
+
+.swap-error {
+    color: var(--color-red);
+    background-color: rgba(255, 138, 138, 0.1);
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.swap-success {
+    color: var(--color-green);
+    background-color: rgba(149, 213, 141, 0.1);
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    text-align: center;
 }

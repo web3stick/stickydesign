@@ -15,7 +15,7 @@ import {
 } from "./SWAP_swap_logic";
 import NEAR_AUTH_BUTTON from "./near_auth_button";
 import { useFastIntearAuth } from "./near.auth";
-import { fetchAndStoreTokenList } from "../../ts/token_list_db";
+import { fetchAndStoreTokenList } from "./SWAP_token_list_db";
 import { TokenDropdown } from "./SWAP_TokenDropdown";
 
 export const Swap = () => {
@@ -45,6 +45,21 @@ export const Swap = () => {
     fetchAndStoreTokenList();
     loadAvailableTokens();
   }, []);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      if (isDropdownOpenIn || isDropdownOpenOut) {
+        setIsDropdownOpenIn(false);
+        setIsDropdownOpenOut(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [isDropdownOpenIn, isDropdownOpenOut]);
 
   const loadAvailableTokens = async () => {
     setIsLoadingTokens(true);
@@ -260,9 +275,16 @@ export const Swap = () => {
               <button
                 type="button"
                 className="swap-token-selector"
-                onClick={() => setIsDropdownOpenIn(!isDropdownOpenIn)}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent event from bubbling to document
+                  setIsDropdownOpenIn(!isDropdownOpenIn);
+                  // Close the other dropdown if it's open
+                  if (isDropdownOpenOut) setIsDropdownOpenOut(false);
+                }}
               >
-                {selectedTokenIn ? (
+                {isLoadingTokenIn ? (
+                  "Loading..."
+                ) : selectedTokenIn ? (
                   <>
                     <TokenIcon
                       icon={selectedTokenIn.metadata?.icon}
@@ -315,9 +337,16 @@ export const Swap = () => {
               <button
                 type="button"
                 className="swap-token-selector"
-                onClick={() => setIsDropdownOpenOut(!isDropdownOpenOut)}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent event from bubbling to document
+                  setIsDropdownOpenOut(!isDropdownOpenOut);
+                  // Close the other dropdown if it's open
+                  if (isDropdownOpenIn) setIsDropdownOpenIn(false);
+                }}
               >
-                {selectedTokenOut ? (
+                {isLoadingTokenOut ? (
+                  "Loading..."
+                ) : selectedTokenOut ? (
                   <>
                     <TokenIcon
                       icon={selectedTokenOut.metadata?.icon}

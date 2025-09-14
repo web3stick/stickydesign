@@ -40,6 +40,8 @@ export const TokenDropdown = ({
           placeholder="Search name or paste address"
           value={searchTerm}
           onInput={(e) => setSearchTerm((e.target as HTMLInputElement).value)}
+          // Prevent click events from bubbling up to parent elements
+          onClick={(e) => e.stopPropagation()}
         />
       </div>
       <div className="token-dropdown-list">
@@ -47,7 +49,8 @@ export const TokenDropdown = ({
           <div
             key={token.contract_id}
             className="token-dropdown-item"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent event bubbling
               onSelect(token);
               onClose();
             }}
