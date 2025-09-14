@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-// import "../../css/swap.css";
+import "./SWAP_css.css";
 import { TokenIcon } from "./SWAP_TokenIcon";
 import {
   executeSwap,
