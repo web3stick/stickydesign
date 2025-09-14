@@ -4,7 +4,7 @@ import { DOGSHIT_TOKEN } from '../../ts/config';
 import WalletIcon from '../../img/wallet.svg';
 import DogshitImg from '../../img/dogshit_img.png';
 import { getAuthStatus, login } from '../../ts/profile_near_auth_login_logout';
-import { TokenIcon } from '../components/TokenIcon';
+import { TokenIcon } from './SWAP_TokenIcon';
 import {
   executeSwap,
   fetchSwapQuote,
