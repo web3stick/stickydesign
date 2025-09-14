@@ -1,5 +1,5 @@
-import type { TokenMetadata } from './swap';
-import NearTokenSvg from '../img/NEAR_token.svg';
+import type { TokenMetadata } from "./SWAP_swap_logic";
+import NearTokenSvg from "./NEAR_token.svg";
 
 export interface NativeToken {
   contract_id: string;
@@ -13,11 +13,11 @@ export interface NativeToken {
  * This represents the native NEAR token that users can swap
  */
 export const NATIVE_NEAR_TOKEN: NativeToken = {
-  contract_id: 'near',
-  displayName: 'NEAR',
+  contract_id: "near",
+  displayName: "NEAR",
   metadata: {
-    name: 'NEAR Protocol',
-    symbol: 'NEAR',
+    name: "NEAR Protocol",
+    symbol: "NEAR",
     decimals: 24,
     icon: NearTokenSvg, // Use local NEAR SVG
   },
@@ -28,11 +28,11 @@ export const NATIVE_NEAR_TOKEN: NativeToken = {
  * Wrapped NEAR token definition
  */
 export const WRAPPED_NEAR_TOKEN: NativeToken = {
-  contract_id: 'wrap.near',
-  displayName: 'wNEAR',
+  contract_id: "wrap.near",
+  displayName: "wNEAR",
   metadata: {
-    name: 'Wrapped NEAR',
-    symbol: 'wNEAR',
+    name: "Wrapped NEAR",
+    symbol: "wNEAR",
     decimals: 24,
     icon: undefined,
   },
@@ -44,19 +44,19 @@ export const WRAPPED_NEAR_TOKEN: NativeToken = {
  */
 export async function getNativeNearBalance(accountId: string): Promise<string> {
   try {
-    console.log('Fetching native NEAR balance for:', accountId);
+    console.log("Fetching native NEAR balance for:", accountId);
     const account = await window.near.queryAccount({
       accountId: accountId,
     });
 
     // FastINTEAR returns a JSON-RPC response, we need the result property
     const accountData = account.result || account;
-    const balance = accountData.amount || '0';
+    const balance = accountData.amount || "0";
 
-    console.log('Native NEAR balance:', balance);
+    console.log("Native NEAR balance:", balance);
     return balance;
   } catch (error) {
-    console.error('Failed to fetch native NEAR balance:', error);
-    return '0';
+    console.error("Failed to fetch native NEAR balance:", error);
+    return "0";
   }
 }
