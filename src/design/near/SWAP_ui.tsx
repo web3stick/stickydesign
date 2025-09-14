@@ -7,9 +7,11 @@ import {
   formatTokenAmount,
   getAvailableTokens,
   prepareSwapToken,
+  selectRoute,
   type SimpleToken,
   type SwapQuote,
   type SwapToken,
+  type SwapRoute,
   toRawAmount,
   validateSwapParams,
 } from "./SWAP_swap_logic";
@@ -43,6 +45,8 @@ export const SwapUI = ({}: SwapUIProps) => {
     setQuote,
     slippage,
     setSlippage,
+    selectedRouteIndex,
+    setSelectedRouteIndex,
     isLoading,
     setIsLoading,
     isLoadingTokens,
@@ -305,6 +309,15 @@ export const SwapUI = ({}: SwapUIProps) => {
     setQuote(null);
   };
 
+  const handleRouteSelect = (index: number) => {
+    console.log('[SwapUI] Selecting route index:', index);
+    if (quote && quote.availableRoutes && index < quote.availableRoutes.length) {
+      const updatedQuote = selectRoute(quote, index);
+      setQuote(updatedQuote);
+      setSelectedRouteIndex(index);
+    }
+  };
+
   // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = () => {
@@ -522,6 +535,37 @@ export const SwapUI = ({}: SwapUIProps) => {
             <span>%</span>
           </div>
         </div>
+
+        {/* Route selection */}
+        {quote && quote.availableRoutes && quote.availableRoutes.length > 1 && (
+          <div className="swap-route-selection">
+            <div className="swap-route-header">Select Route</div>
+            <div className="swap-route-options">
+              {quote.availableRoutes.map((route, index) => (
+                <div
+                  key={index}
+                  className={`swap-route-option ${
+                    selectedRouteIndex === index ? "selected" : ""
+                  }`}
+                  onClick={() => handleRouteSelect(index)}
+                >
+                  <div className="swap-route-info">
+                    {route.dex_id || "Unknown DEX"}
+                  </div>
+                  <div className="swap-route-details">
+                    <span className="swap-route-amount">
+                      {formatTokenAmount(
+                        route.estimated_amount?.amount_out || "0",
+                        selectedTokenOut?.metadata.decimals || 18,
+                      )}{" "}
+                      {selectedTokenOut?.displayName}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         <button
           type="button"

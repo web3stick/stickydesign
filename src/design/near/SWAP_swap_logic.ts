@@ -196,6 +196,8 @@ export async function fetchSwapQuote(
     }
 
     const url = `${CONFIG.DEX_AGG}?${params.toString()}`;
+    console.log('[DEX AGG] Fetching swap quote from:', url);
+    
     const response = await fetch(url, {
       method: "GET",
       headers: {
@@ -209,10 +211,22 @@ export async function fetchSwapQuote(
     }
 
     const data = await response.json();
+    console.log('[DEX AGG] Raw response data:', data);
 
     if (!Array.isArray(data) || data.length === 0) {
       throw new Error("No routes found for this swap");
     }
+
+    // Log details of each route
+    data.forEach((route, index) => {
+      console.log(`[DEX AGG] Route ${index}:`, {
+        dexId: route.dex_id,
+        estimatedAmount: route.estimated_amount?.amount_out,
+        worstCaseAmount: route.worst_case_amount?.amount_out,
+        gasEstimate: route.gas_estimate || route.gasEstimate,
+        actionsCount: route.execution_instructions?.length || 0
+      });
+    });
 
     const [inputPrice, outputPrice] = await Promise.all([
       fetchTokenPrice(tokenIn === "near" ? "wrap.near" : tokenIn),
@@ -220,6 +234,8 @@ export async function fetchSwapQuote(
     ]);
 
     const bestRoute = data[0];
+    console.log('[DEX AGG] Best route:', bestRoute);
+    
     const inputAmountFormatted = parseFloat(amountIn) / 10 ** inputDecimals;
     const outputAmountFormatted =
       parseFloat(bestRoute.estimated_amount?.amount_out || "0") / 10 ** 18;

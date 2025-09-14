@@ -27,6 +27,10 @@ interface SwapState {
   slippage: number;
   setSlippage: (slippage: number) => void;
   
+  // Route selection
+  selectedRouteIndex: number;
+  setSelectedRouteIndex: (index: number) => void;
+  
   // UI states
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
@@ -85,6 +89,10 @@ export const useSwapStore = create<SwapState>()(
     slippage: 1.0,
     setSlippage: (slippage) => set({ slippage }),
     
+    // Route selection
+    selectedRouteIndex: 0,
+    setSelectedRouteIndex: (selectedRouteIndex) => set({ selectedRouteIndex }),
+    
     // UI states
     isLoading: false,
     setIsLoading: (isLoading) => set({ isLoading }),
@@ -123,6 +131,7 @@ export const useSwapStore = create<SwapState>()(
         isLoading: false,
         isLoadingTokenIn: false,
         isLoadingTokenOut: false,
+        selectedRouteIndex: 0, // Reset route selection
       });
     },
   }))

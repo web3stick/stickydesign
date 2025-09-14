@@ -289,6 +289,68 @@
     color: var(--secondary-text-color);
 }
 
+.swap-route-selection {
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+}
+
+.swap-route-header {
+    font-size: 0.875rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.swap-route-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.swap-route-option {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: var(--container-background);
+}
+
+.swap-route-option:hover {
+    border-color: var(--swap-primary);
+    background-color: var(--background-color);
+}
+
+.swap-route-option.selected {
+    border-color: var(--swap-primary);
+    background-color: rgba(201, 168, 244, 0.1); /* Light purple background */
+}
+
+.swap-route-info {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+
+.swap-route-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: var(--secondary-text-color);
+}
+
+.swap-route-amount {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.swap-route-gas {
+    color: var(--secondary-text-color);
+}
+
 .swap-percentage-buttons {
     display: flex;
     gap: 0.5rem;
@@ -320,7 +382,7 @@
     transform: scale(0.95);
 }
 
-.swap-button {
+.swap-auth-button {
     background-color: var(--swap-primary);
     color: white;
     border: none;
@@ -330,16 +392,29 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s;
-    width: 100%;
+    width: 100%; /* Make it full width of its container */
+    margin-bottom: 1rem; /* Add some space below the button */
 }
 
-.swap-button:hover:not(:disabled) {
+.swap-auth-button:hover:not(:disabled) {
     background-color: var(--color-blue);
 }
 
-.swap-button:disabled {
+.swap-auth-button:disabled {
     background-color: var(--border-color);
     cursor: not-allowed;
+}
+
+.swap-slippage-input {
+    width: 60px; /* Make the input wider */
+    padding: 0.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    background-color: var(--container-background);
+    color: var(--text-color);
+    box-sizing: border-box;
+    text-align: center; /* Center the text */
 }
 
 .swap-error {
