@@ -13,7 +13,7 @@ import { ROUTES } from "./ts/routes.ts";
 import STICKY_design_header from "./design/header.tsx";
 import STICKY_design_color from "./design/color/color.tsx";
 import STICKY_design_button from "./design/button/button.tsx";
-import STICKY_design_near from "./design/near/button.tsx";
+import STICKY_design_near from "./design/near/near.tsx";
 import STICKY_design_footer from "./design/footer.tsx";
 
 
