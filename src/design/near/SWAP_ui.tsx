@@ -1,4 +1,4 @@
-import { useState, useEffect } from "preact/hooks";
+import { useEffect } from "preact/hooks";
 import "./SWAP_css.css";
 import { TokenIcon } from "./SWAP_TokenIcon";
 import {
@@ -15,37 +15,72 @@ import {
 } from "./SWAP_swap_logic";
 import { TokenDropdown } from "./SWAP_TokenDropdown";
 import { fetchAndStoreTokenList } from "./SWAP_token_list_db";
+import { useSwapStore } from "./swapStore";
 
 interface SwapUIProps {
-  accountId: string | null;
+  // accountId is now managed by the store, so we don't need it as a prop
 }
 
-export const SwapUI = ({ accountId }: SwapUIProps) => {
-  const [availableTokens, setAvailableTokens] = useState<SimpleToken[]>([]);
-  const [selectedTokenIn, setSelectedTokenIn] = useState<SwapToken | null>(
-    null,
-  );
-  const [selectedTokenOut, setSelectedTokenOut] = useState<SwapToken | null>(
-    null,
-  );
-  const [isLoadingTokenIn, setIsLoadingTokenIn] = useState<boolean>(false);
-  const [isLoadingTokenOut, setIsLoadingTokenOut] = useState<boolean>(false);
-  const [inputAmount, setInputAmount] = useState<string>("");
-  const [quote, setQuote] = useState<SwapQuote | null>(null);
-  const [slippage, setSlippage] = useState<number>(1.0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isLoadingTokens, setIsLoadingTokens] = useState<boolean>(false);
-  const [isDropdownOpenIn, setIsDropdownOpenIn] = useState<boolean>(false);
-  const [isDropdownOpenOut, setIsDropdownOpenOut] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [success, setSuccess] = useState<string>("");
+export const SwapUI = ({}: SwapUIProps) => {
+  console.log('[SwapUI] Render');
+  
+  // Use Zustand store for state management
+  const {
+    accountId, // Get accountId directly from the store
+    availableTokens,
+    setAvailableTokens,
+    selectedTokenIn,
+    setSelectedTokenIn,
+    selectedTokenOut,
+    setSelectedTokenOut,
+    isLoadingTokenIn,
+    setIsLoadingTokenIn,
+    isLoadingTokenOut,
+    setIsLoadingTokenOut,
+    inputAmount,
+    setInputAmount,
+    quote,
+    setQuote,
+    slippage,
+    setSlippage,
+    isLoading,
+    setIsLoading,
+    isLoadingTokens,
+    setIsLoadingTokens,
+    isDropdownOpenIn,
+    setIsDropdownOpenIn,
+    isDropdownOpenOut,
+    setIsDropdownOpenOut,
+    error,
+    setError,
+    success,
+    setSuccess,
+    resetSwapState
+  } = useSwapStore();
+  
+  console.log('[SwapUI] accountId from store:', accountId);
+  
+  // Remove the useEffect that was trying to sync the prop with the store
+  // The store is now the source of truth for accountId
 
   useEffect(() => {
+    console.log('[SwapUI] Component mounted, fetching token list and loading tokens');
     fetchAndStoreTokenList();
     loadAvailableTokens();
   }, []);
 
+  // Reset state and re-fetch data when accountId changes
+  useEffect(() => {
+    console.log('[SwapUI] accountId changed, resetting state and reloading tokens');
+    // Reset token selections and quote when account changes
+    resetSwapState();
+    
+    // Reload available tokens and set defaults
+    loadAvailableTokens();
+  }, [accountId]); // Re-run when accountId changes
+
   const loadAvailableTokens = async () => {
+    console.log('[SwapUI] Loading available tokens');
     setIsLoadingTokens(true);
     const tokens = await getAvailableTokens();
     setAvailableTokens(tokens);
@@ -75,6 +110,7 @@ export const SwapUI = ({ accountId }: SwapUIProps) => {
   };
 
   const selectToken = async (simpleToken: SimpleToken, type: "in" | "out") => {
+    console.log('[SwapUI] Selecting token:', simpleToken, 'type:', type);
     if (type === "in") {
       setIsLoadingTokenIn(true);
     } else {
