@@ -14,8 +14,13 @@ const STICKY_design_button = () => {
 
   return (
     <section>
+      <h1>STICKY_button</h1>
+      <p>button for sticky</p>
+      
+      {/*STICKY_button*/}
       <button>STICKY_button</button>
 
+      {/*pre*/}
       <pre>
         <code className="language-css">{button_CSS}</code>
       </pre>
