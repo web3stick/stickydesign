@@ -17,6 +17,7 @@ import NEAR_AUTH_BUTTON from "./near_auth_button";
 import { useFastIntearAuth } from "./near.auth";
 import { fetchAndStoreTokenList } from "./SWAP_token_list_db";
 import { TokenDropdown } from "./SWAP_TokenDropdown";
+import { ArrowDownUp } from 'lucide-preact';
 
 export const Swap = () => {
   const { auth } = useFastIntearAuth();
@@ -324,7 +325,7 @@ export const Swap = () => {
               className="swap-arrow-button"
               onClick={handleSwitchTokens}
             >
-              ↓
+              <ArrowDownUp size={16} />
             </button>
           </div>
 

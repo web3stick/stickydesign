@@ -58,6 +58,9 @@
     border-radius: 8px;
     border: 1px solid var(--border-color);
     position: relative; /* Ensure proper positioning context */
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
 .swap-input-header {
@@ -72,18 +75,20 @@
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     background-color: var(--container-background);
     cursor: pointer;
-    color: var(--swap-primary); /* Changed to purple to differentiate from other buttons */
+    color: var(--text-color); /* Changed back to default text color for better visibility */
     font-weight: 600;
     font-size: 1rem;
+    transition: all 0.2s ease;
 }
 
 .swap-token-selector:hover {
-    border-color: var(--swap-secondary);
+    border-color: var(--swap-primary);
+    background-color: var(--background-color);
 }
 
 .token-icon {
@@ -189,12 +194,13 @@
 
 .swap-amount-input {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.75rem;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     font-size: 1.25rem;
     background-color: var(--container-background);
     color: var(--text-color);
+    box-sizing: border-box;
 }
 
 .swap-arrow-container {
@@ -208,8 +214,8 @@
     background-color: var(--container-background);
     border: 2px solid var(--swap-secondary);
     border-radius: 50%;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;

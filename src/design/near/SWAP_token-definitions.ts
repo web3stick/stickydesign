@@ -1,3 +1,4 @@
+import * as near from "fastintear";
 import type { TokenMetadata } from "./SWAP_swap_logic";
 import NearTokenSvg from "./NEAR_token.svg";
 
@@ -45,7 +46,7 @@ export const WRAPPED_NEAR_TOKEN: NativeToken = {
 export async function getNativeNearBalance(accountId: string): Promise<string> {
   try {
     console.log("Fetching native NEAR balance for:", accountId);
-    const account = await window.near.queryAccount({
+    const account = await near.queryAccount({
       accountId: accountId,
     });
 
