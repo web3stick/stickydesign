@@ -5,8 +5,8 @@ const SWAP_AUTH_BUTTON: FunctionalComponent = () => {
     const { auth, login, logout } = useSwapAuth();
 
     return (
-        <button id="SWAP_AUTH_BUTTON" onClick={auth.loggedIn ? logout : login}>
-            {auth.loggedIn ? `LOGOUT (${auth.accountId})` : 'LOGIN'}
+        <button className="swap-auth-button" onClick={auth.loggedIn ? logout : login}>
+            {auth.loggedIn ? `LOGOUT (${auth.accountId})` : 'LOGIN TO SWAP'}
         </button>
     );
 };
