@@ -12,16 +12,29 @@ export function useFastIntearAuth(): {
   const [auth, setAuth] = useState<AuthState>({ loggedIn: false });
 
   useEffect(() => {
-    const status = near.authStatus();
-    console.log('[FastINTEAR] Auth status on mount:', status);
+    const checkAuthStatus = () => {
+      const status = near.authStatus();
+      console.log('[FastINTEAR] Auth status check:', status);
 
-    if (status === 'SignedIn') {
-      const accountId = near.accountId();
-      console.log('[FastINTEAR] Detected signed-in account:', accountId);
-      if (accountId) {
-        setAuth({ loggedIn: true, accountId });
+      if (status === 'SignedIn') {
+        const accountId = near.accountId();
+        console.log('[FastINTEAR] Detected signed-in account:', accountId);
+        if (accountId) {
+          setAuth({ loggedIn: true, accountId });
+        }
+      } else {
+        setAuth({ loggedIn: false });
       }
-    }
+    };
+
+    // Check auth status on mount
+    checkAuthStatus();
+
+    // Set up an interval to check auth status periodically
+    const interval = setInterval(checkAuthStatus, 1000);
+
+    // Clean up interval on unmount
+    return () => clearInterval(interval);
   }, []);
 
   const login = async () => {
