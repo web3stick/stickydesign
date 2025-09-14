@@ -9,23 +9,30 @@ export const Swap = () => {
   // We no longer need to derive accountId here since it's managed by the store
   // But we still need to update the store when auth changes
   const setStoreAccountId = useSwapStore((state) => state.setAccountId);
-  
+
   // Update the store's accountId when auth changes
   useEffect(() => {
-    console.log('[SWAP_MAIN] Auth state changed, updating store:', auth);
+    console.log("[SWAP_MAIN] Auth state changed, updating store:", auth);
     setStoreAccountId(auth.loggedIn ? auth.accountId : null);
   }, [auth, setStoreAccountId]);
 
   // Simple key that changes on auth state to force complete re-render
-  const componentKey = auth.loggedIn ? `logged-in-${auth.accountId}` : 'logged-out';
-  
-  console.log('[SWAP_MAIN] Render with auth state:', auth, 'key:', componentKey);
+  const componentKey = auth.loggedIn
+    ? `logged-in-${auth.accountId}`
+    : "logged-out";
+
+  console.log(
+    "[SWAP_MAIN] Render with auth state:",
+    auth,
+    "key:",
+    componentKey,
+  );
 
   // Add a useEffect to log when the component mounts/unmounts
   useEffect(() => {
-    console.log('[SWAP_MAIN] Component mounted with auth state:', auth);
+    console.log("[SWAP_MAIN] Component mounted with auth state:", auth);
     return () => {
-      console.log('[SWAP_MAIN] Component unmounted');
+      console.log("[SWAP_MAIN] Component unmounted");
     };
   }, []);
 
@@ -33,12 +40,11 @@ export const Swap = () => {
     <div className="page swap-page" key={componentKey}>
       <div className="swap-container">
         <div className="swap-header">
-          <h2 className="swap-title">dex agg widget</h2>
+          <h2 className="swap-title">web4dex</h2>
         </div>
-        
         <SWAP_AUTH_BUTTON />
-        
         <SwapUI />
+        <p>powered by intear, designed by sleet</p>
       </div>
     </div>
   );
