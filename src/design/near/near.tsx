@@ -21,6 +21,7 @@ const STICKY_design_near = () => {
       
       {/*STICKY_button*/}
       <NEAR_AUTH_BUTTON />
+      <h1>TOKEN SWAP COMPONENTS</h1>
       <Swap />
 
     </section>

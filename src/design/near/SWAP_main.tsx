@@ -283,15 +283,10 @@ export const Swap = () => {
 
   return (
     <div className="page swap-page">
-      <header>
-        <h1>TOKEN SWAP</h1>
-        <p>The most efficient way to trade tokens on NEAR.</p>
-      </header>
-
       <div className="swap-container">
-        <div className="swap-header">
-          <h2 className="swap-title">Swap Tokens</h2>
-        </div>
+        {/*<div className="swap-header">
+          <h2 className="swap-title">dex agg widget</h2>
+        </div>*/}
 
         {error && <div className="swap-error">{error}</div>}
         {success && <div className="swap-success">{success}</div>}
@@ -512,6 +507,7 @@ export const Swap = () => {
           </button>
           <NEAR_AUTH_BUTTON />
         </div>
+        <p>powered by intear</p>
       </div>
     </div>
   );
