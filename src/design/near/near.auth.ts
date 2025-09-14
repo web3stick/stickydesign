@@ -1,3 +1,5 @@
+import * as near from 'fastintear';
+
 import { useEffect, useState } from 'preact/hooks';
 
 
