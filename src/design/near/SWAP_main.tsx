@@ -16,6 +16,7 @@ import {
 import NEAR_AUTH_BUTTON from "./near_auth_button";
 import { useFastIntearAuth } from "./near.auth";
 import { fetchAndStoreTokenList } from "../../ts/token_list_db";
+import { TokenDropdown } from "./SWAP_TokenDropdown";
 
 export const Swap = () => {
   const { auth } = useFastIntearAuth();
@@ -275,29 +276,12 @@ export const Swap = () => {
                 )}
               </button>
 
-              {isDropdownOpenIn && (
-                <div className="token-dropdown-menu">
-                  {isLoadingTokens ? (
-                    <div className="token-dropdown-item">Loading...</div>
-                  ) : (
-                    availableTokens.map((token) => (
-                      <button
-                        type="button"
-                        key={token.contract_id}
-                        className="token-dropdown-item"
-                        onClick={() => handleTokenSelect(token, "in")}
-                      >
-                        <TokenIcon
-                          icon={token.metadata?.icon}
-                          symbol={token.displayName}
-                          size="small"
-                        />
-                        {token.displayName}
-                      </button>
-                    ))
-                  )}
-                </div>
-              )}
+              <TokenDropdown
+                tokens={availableTokens}
+                onSelect={(token) => handleTokenSelect(token, "in")}
+                isOpen={isDropdownOpenIn}
+                onClose={() => setIsDropdownOpenIn(false)}
+              />
             </div>
 
             <div className="swap-amount-section">
@@ -348,29 +332,12 @@ export const Swap = () => {
                 )}
               </button>
 
-              {isDropdownOpenOut && (
-                <div className="token-dropdown-menu">
-                  {isLoadingTokens ? (
-                    <div className="token-dropdown-item">Loading...</div>
-                  ) : (
-                    availableTokens.map((token) => (
-                      <button
-                        type="button"
-                        key={token.contract_id}
-                        className="token-dropdown-item"
-                        onClick={() => handleTokenSelect(token, "out")}
-                      >
-                        <TokenIcon
-                          icon={token.metadata?.icon}
-                          symbol={token.displayName}
-                          size="small"
-                        />
-                        {token.displayName}
-                      </button>
-                    ))
-                  )}
-                </div>
-              )}
+              <TokenDropdown
+                tokens={availableTokens}
+                onSelect={(token) => handleTokenSelect(token, "out")}
+                isOpen={isDropdownOpenOut}
+                onClose={() => setIsDropdownOpenOut(false)}
+              />
             </div>
 
             <div className="swap-amount-section">

@@ -1,4 +1,4 @@
-import * as near from 'fastintear';
+import * as near from "fastintear";
 
 import { CONFIG } from "./NEAR_config";
 import { getTokensFromDB } from "../../ts/token_list_db";
@@ -19,6 +19,9 @@ export interface SimpleToken {
   displayName: string;
   isNative?: boolean;
   metadata?: TokenMetadata;
+  price_usd?: string;
+  liquidity_usd?: number;
+  volume_usd_24h?: number;
 }
 
 export interface SwapToken extends SimpleToken {
@@ -31,7 +34,11 @@ export async function getAvailableTokens(): Promise<SimpleToken[]> {
   const tokensFromDB = await getTokensFromDB();
   const simpleTokens: SimpleToken[] = tokensFromDB.map((token) => ({
     contract_id: token.account_id,
-    displayName: token.symbol,
+    displayName: token.metadata.symbol,
+    metadata: token.metadata,
+    price_usd: token.price_usd,
+    liquidity_usd: token.liquidity_usd,
+    volume_usd_24h: token.volume_usd_24h,
   }));
 
   // Add native NEAR
@@ -431,6 +438,8 @@ export async function executeSwap(quote: SwapQuote): Promise<void> {
 
   // Execute all transactions in a single wallet popup using the adapter
   // this is going to throw errors that is fine
+  // it must be this exactly
+  //   await near.state._adapter.sendTransactions({
   await near.state._adapter.sendTransactions({
     transactions: transactions,
   });
