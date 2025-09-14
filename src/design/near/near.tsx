@@ -1,8 +1,11 @@
 import { useEffect } from "preact/hooks";
 import Prism from "prismjs";
 import "prismjs/themes/prism-okaidia.css";
+import './near.config'
+import './near.auth'
 
-
+// near tsx
+import NEAR_AUTH_BUTTON from "./near_auth_button";
 
 // STICKY_design_near
 const STICKY_design_near = () => {
@@ -16,7 +19,7 @@ const STICKY_design_near = () => {
       <p>near components and logic for sticky</p>
       
       {/*STICKY_button*/}
-      <button>STICKY_button</button>
+      <NEAR_AUTH_BUTTON />
 
     </section>
   );
