@@ -6,6 +6,9 @@
     --border-color: #e9ecef;
     --accent-color: #007bff;
 }
+button {
+    color: black
+}
 
 .swap-page {
     display: flex;
