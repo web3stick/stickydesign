@@ -392,11 +392,11 @@ export const Swap = () => {
                   handleAmountChange((e.target as HTMLInputElement).value)
                 }
               />
-              {inputAmount && selectedTokenIn && selectedTokenIn.priceUsd && (
+              {inputAmount && quote && quote.inputValueUsd ? (
                 <div className="swap-amount-value">
-                  ≈ ${(parseFloat(inputAmount) * selectedTokenIn.priceUsd).toFixed(2)} USD
+                  ≈ ${quote.inputValueUsd.toFixed(2)} USD
                 </div>
-              )}
+              ) : null}
             </div>
           </div>
 
@@ -464,18 +464,11 @@ export const Swap = () => {
                 }
                 readOnly
               />
-              {quote && selectedTokenOut && selectedTokenOut.priceUsd && (
+              {quote && quote.outputValueUsd ? (
                 <div className="swap-amount-value">
-                  ≈ ${(
-                    parseFloat(
-                      formatTokenAmount(
-                        quote.outputAmount,
-                        selectedTokenOut?.metadata.decimals || 18,
-                      )
-                    ) * selectedTokenOut.priceUsd
-                  ).toFixed(2)} USD
+                  ≈ ${quote.outputValueUsd.toFixed(2)} USD
                 </div>
-              )}
+              ) : null}
             </div>
           </div>
 

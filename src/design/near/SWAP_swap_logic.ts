@@ -35,10 +35,12 @@ export async function getAvailableTokens(): Promise<SimpleToken[]> {
   const simpleTokens: SimpleToken[] = tokensFromDB.map((token) => ({
     contract_id: token.account_id,
     displayName: token.metadata.symbol,
-    metadata: token.metadata,
-    price_usd: token.price_usd,
-    liquidity_usd: token.liquidity_usd,
-    volume_usd_24h: token.volume_usd_24h,
+    metadata: {
+      name: token.metadata.name,
+      symbol: token.metadata.symbol,
+      decimals: token.metadata.decimals,
+    },
+    // Don't include price data from token list
   }));
 
   // Add native NEAR
@@ -289,15 +291,16 @@ export async function prepareSwapToken(
   
   try {
     if (simpleToken.isNative && simpleToken.contract_id === "near") {
-      const [metadata, priceUsd] = await Promise.all([
-        Promise.resolve(NATIVE_NEAR_TOKEN.metadata),
-        fetchTokenPrice("wrap.near"), // Use wrap.near for price fetching
-      ]);
+      // For native NEAR, use predefined metadata
+      const metadata = NATIVE_NEAR_TOKEN.metadata;
       
       // Only fetch balance if we have an account ID
       const actualBalance = hasAccountId 
         ? await getNativeNearBalance(accountId) 
         : "0";
+        
+      // Fetch price separately using wrap.near as proxy
+      const priceUsd = await fetchTokenPrice("wrap.near");
 
       return {
         ...simpleToken,
@@ -309,7 +312,7 @@ export async function prepareSwapToken(
       };
     }
 
-    // For non-native tokens, fetch metadata and price
+    // For non-native tokens, fetch both metadata and price
     const [metadata, priceUsd] = await Promise.all([
       fetchTokenMetadata(simpleToken.contract_id),
       fetchTokenPrice(simpleToken.contract_id),
@@ -333,6 +336,7 @@ export async function prepareSwapToken(
       `Failed to prepare swap token ${simpleToken.contract_id}:`,
       error,
     );
+    // Fallback with minimal metadata
     return {
       ...simpleToken,
       metadata: {
