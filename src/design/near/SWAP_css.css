@@ -1,0 +1,124 @@
+:root {
+    --background-color: #f8f9fa;
+    --container-background: #fff;
+    --text-color: #212529;
+    --secondary-text-color: #6c757d;
+    --border-color: #e9ecef;
+    --accent-color: #007bff;
+}
+
+.swap-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.swap-container {
+    background-color: var(--container-background);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.swap-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.swap-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.swap-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.swap-input-group {
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.swap-input-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--secondary-text-color);
+}
+
+.swap-token-selector {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--container-background);
+    cursor: pointer;
+}
+
+.swap-token-selector .token-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.5rem;
+}
+
+.token-dropdown-menu {
+    position: absolute;
+    background-color: var(--container-background);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    width: calc(100% - 2rem);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.token-dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+.token-dropdown-item:hover {
+    background-color: var(--background-color);
+}
+
+.token-dropdown-item .token-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.5rem;
+}
+
+.swap-amount-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1.25rem;
+    background-color: var(--container-background);
+    color: var(--text-color);
+}
+
+.swap-arrow-container {
+    display: flex;
+    justify-content: center;
+}
+
+.swap-settings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--secondary-text-color);
+}
