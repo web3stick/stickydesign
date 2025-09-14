@@ -60,8 +60,8 @@ export const TokenDropdown = ({
               <div className="token-dropdown-item-symbol">
                 {token.displayName}
               </div>
-              <div className="token-dropdown-item-name">
-                {token.metadata?.name}
+              <div className="token-dropdown-item-contract">
+                {token.contract_id}
               </div>
             </div>
           </div>

@@ -243,11 +243,11 @@ export async function fetchSwapQuote(
 }
 
 /**
- * Fetches token price in USD from Intear prices API
+ * Fetches token price in USD from Intear prices API (super precise)
  */
 export async function fetchTokenPrice(contractId: string): Promise<number> {
   try {
-    const url = `https://prices.intear.tech/price?token_id=${contractId}`;
+    const url = `https://prices.intear.tech/super-precise-price?token_id=${contractId}`;
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -256,13 +256,21 @@ export async function fetchTokenPrice(contractId: string): Promise<number> {
 
     const data = await response.json();
     let price = 0;
-    if (typeof data === "number") {
+    
+    // Handle the string response from super-precise-price
+    if (typeof data === "string") {
+      price = parseFloat(data);
+    } else if (typeof data === "number") {
       price = data;
     } else if (typeof data === "object" && data !== null) {
+      // Fallback to the regular price endpoint format
       price = data.price || data.price_usd || data.usd_price || 0;
+      if (typeof price === "string") {
+        price = parseFloat(price);
+      }
     }
 
-    return price;
+    return price || 0;
   } catch (error) {
     console.error(`Error fetching price for ${contractId}:`, error);
     return 0;
@@ -276,16 +284,24 @@ export async function prepareSwapToken(
   simpleToken: SimpleToken,
   accountId: string,
 ): Promise<SwapToken> {
+  // Handle empty account ID
+  const hasAccountId = accountId && accountId.trim() !== "";
+  
   try {
     if (simpleToken.isNative && simpleToken.contract_id === "near") {
-      const [actualBalance, priceUsd] = await Promise.all([
-        getNativeNearBalance(accountId),
+      const [metadata, priceUsd] = await Promise.all([
+        Promise.resolve(NATIVE_NEAR_TOKEN.metadata),
         fetchTokenPrice("wrap.near"),
       ]);
+      
+      // Only fetch balance if we have an account ID
+      const actualBalance = hasAccountId 
+        ? await getNativeNearBalance(accountId) 
+        : "0";
 
       return {
         ...simpleToken,
-        metadata: NATIVE_NEAR_TOKEN.metadata,
+        metadata,
         actualBalance,
         displayName: NATIVE_NEAR_TOKEN.displayName,
         priceUsd,
@@ -293,11 +309,16 @@ export async function prepareSwapToken(
       };
     }
 
-    const [metadata, actualBalance, priceUsd] = await Promise.all([
+    // For non-native tokens, fetch metadata and price
+    const [metadata, priceUsd] = await Promise.all([
       fetchTokenMetadata(simpleToken.contract_id),
-      fetchTokenBalance(simpleToken.contract_id, accountId),
       fetchTokenPrice(simpleToken.contract_id),
     ]);
+    
+    // Only fetch balance if we have an account ID
+    const actualBalance = hasAccountId 
+      ? await fetchTokenBalance(simpleToken.contract_id, accountId) 
+      : "0";
 
     return {
       ...simpleToken,

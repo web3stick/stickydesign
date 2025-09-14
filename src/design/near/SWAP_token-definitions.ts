@@ -44,9 +44,15 @@ export const WRAPPED_NEAR_TOKEN: NativeToken = {
  * Gets the native NEAR balance for an account using FastNEAR
  */
 export async function getNativeNearBalance(accountId: string): Promise<string> {
+  // Return early if accountId is empty or not provided
+  if (!accountId || accountId.trim() === "") {
+    console.log("No account ID provided for balance fetch");
+    return "0";
+  }
+  
   try {
     console.log("Fetching native NEAR balance for:", accountId);
-    const account = await near.queryAccount({
+    const account = await window.near.queryAccount({
       accountId: accountId,
     });
 

@@ -17,7 +17,6 @@ import NEAR_AUTH_BUTTON from "./near_auth_button";
 import { useFastIntearAuth } from "./near.auth";
 import { fetchAndStoreTokenList } from "./SWAP_token_list_db";
 import { TokenDropdown } from "./SWAP_TokenDropdown";
-import { ArrowDownUp } from 'lucide-preact';
 
 export const Swap = () => {
   const { auth } = useFastIntearAuth();
@@ -69,15 +68,24 @@ export const Swap = () => {
     setIsLoadingTokens(false);
 
     if (tokens.length > 0) {
+      // Set NEAR as the default "from" token
       const nearToken = tokens.find((t) => t.isNative);
       if (nearToken) {
         selectToken(nearToken, "in");
       }
-      const dogshitToken = tokens.find(
-        (t) => t.contract_id === "token.dogshit.near",
+      
+      // Set SHIT token as the default "to" token
+      const shitToken = tokens.find(
+        (t) => t.contract_id === "shit-1170.meme-cooking.near",
       );
-      if (dogshitToken) {
-        selectToken(dogshitToken, "out");
+      if (shitToken) {
+        selectToken(shitToken, "out");
+      } else if (!shitToken && !nearToken) {
+        // Fallback to first available token if neither is found
+        selectToken(tokens[0], "in");
+        if (tokens.length > 1) {
+          selectToken(tokens[1], "out");
+        }
       }
     }
   };
@@ -90,6 +98,7 @@ export const Swap = () => {
     }
 
     try {
+      // Only fetch balance if user is logged in
       const swapToken = await prepareSwapToken(simpleToken, accountId || "");
       if (type === "in") {
         setSelectedTokenIn(swapToken);
@@ -125,6 +134,40 @@ export const Swap = () => {
     setInputAmount(maxAmount);
     if (parseFloat(maxAmount) > 0) {
       debouncedFetchQuote(maxAmount);
+    }
+  };
+
+  const handlePercentageClick = (percentage: number) => {
+    if (!selectedTokenIn) return;
+    
+    // Convert balance to a number using the same logic as formatTokenAmount
+    const balanceRaw = selectedTokenIn.actualBalance;
+    const decimals = selectedTokenIn.metadata.decimals;
+    const balance = parseFloat(balanceRaw) / Math.pow(10, decimals);
+    
+    // Calculate percentage amount
+    const percentageAmount = (balance * percentage) / 100;
+    
+    // Format the amount properly to avoid floating point issues
+    let formattedAmount: string;
+    if (percentageAmount === 0) {
+      formattedAmount = "0";
+    } else if (percentageAmount < 0.000001) {
+      formattedAmount = percentageAmount.toExponential(2);
+    } else if (percentageAmount < 1) {
+      formattedAmount = percentageAmount.toFixed(6).replace(/\.?0+$/, '');
+    } else if (percentageAmount < 1000) {
+      formattedAmount = percentageAmount.toFixed(4).replace(/\.?0+$/, '');
+    } else {
+      formattedAmount = percentageAmount.toLocaleString(undefined, {
+        maximumFractionDigits: 2,
+        minimumFractionDigits: 0,
+      });
+    }
+    
+    setInputAmount(formattedAmount);
+    if (percentageAmount > 0) {
+      debouncedFetchQuote(formattedAmount);
     }
   };
 
@@ -272,6 +315,39 @@ export const Swap = () => {
               )}
             </div>
 
+            {selectedTokenIn && accountId && (
+              <div className="swap-percentage-buttons">
+                <button 
+                  type="button" 
+                  className="swap-percentage-button"
+                  onClick={() => handlePercentageClick(25)}
+                >
+                  25%
+                </button>
+                <button 
+                  type="button" 
+                  className="swap-percentage-button"
+                  onClick={() => handlePercentageClick(50)}
+                >
+                  50%
+                </button>
+                <button 
+                  type="button" 
+                  className="swap-percentage-button"
+                  onClick={() => handlePercentageClick(75)}
+                >
+                  75%
+                </button>
+                <button 
+                  type="button" 
+                  className="swap-percentage-button"
+                  onClick={() => handlePercentageClick(100)}
+                >
+                  Max
+                </button>
+              </div>
+            )}
+
             <div className="token-dropdown">
               <button
                 type="button"
@@ -316,6 +392,11 @@ export const Swap = () => {
                   handleAmountChange((e.target as HTMLInputElement).value)
                 }
               />
+              {inputAmount && selectedTokenIn && selectedTokenIn.priceUsd && (
+                <div className="swap-amount-value">
+                  ≈ ${(parseFloat(inputAmount) * selectedTokenIn.priceUsd).toFixed(2)} USD
+                </div>
+              )}
             </div>
           </div>
 
@@ -325,7 +406,7 @@ export const Swap = () => {
               className="swap-arrow-button"
               onClick={handleSwitchTokens}
             >
-              <ArrowDownUp size={16} />
+              <div className="swap-arrow-icon" />
             </button>
           </div>
 
@@ -383,6 +464,18 @@ export const Swap = () => {
                 }
                 readOnly
               />
+              {quote && selectedTokenOut && selectedTokenOut.priceUsd && (
+                <div className="swap-amount-value">
+                  ≈ ${(
+                    parseFloat(
+                      formatTokenAmount(
+                        quote.outputAmount,
+                        selectedTokenOut?.metadata.decimals || 18,
+                      )
+                    ) * selectedTokenOut.priceUsd
+                  ).toFixed(2)} USD
+                </div>
+              )}
             </div>
           </div>
 
