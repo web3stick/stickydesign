@@ -6,6 +6,7 @@ import './near.auth'
 
 // near tsx
 import NEAR_AUTH_BUTTON from "./near_auth_button";
+import { Swap } from './SWAP';
 
 // STICKY_design_near
 const STICKY_design_near = () => {
@@ -20,6 +21,7 @@ const STICKY_design_near = () => {
       
       {/*STICKY_button*/}
       <NEAR_AUTH_BUTTON />
+      <Swap />
 
     </section>
   );
