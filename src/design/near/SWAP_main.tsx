@@ -13,17 +13,16 @@ import {
   toRawAmount,
   validateSwapParams,
 } from "./SWAP_swap_logic";
-import NEAR_AUTH_BUTTON from "./near_auth_button";
-import { useFastIntearAuth } from "./near.auth";
+import SWAP_AUTH_BUTTON from "./SWAP_auth_button";
+import { useSwapAuth } from "./SWAP_auth";
 import { fetchAndStoreTokenList } from "./SWAP_token_list_db";
 import { TokenDropdown } from "./SWAP_TokenDropdown";
 
 export const Swap = () => {
-  const { auth } = useFastIntearAuth();
+  const { auth } = useSwapAuth();
   const accountId = auth.loggedIn ? auth.accountId : null;
   
-  // Debug auth state
-  console.log('Swap auth state:', auth, 'accountId:', accountId);
+  console.log('[SWAP] Render - Auth state:', auth, 'Account ID:', accountId);
 
   const [availableTokens, setAvailableTokens] = useState<SimpleToken[]>([]);
   const [selectedTokenIn, setSelectedTokenIn] = useState<SwapToken | null>(
@@ -51,17 +50,21 @@ export const Swap = () => {
 
   // Refresh tokens when user logs in/out
   useEffect(() => {
-    console.log('Account ID changed in effect:', accountId);
+    console.log('[SWAP] Account ID changed in effect:', accountId);
     if (accountId) {
       // User logged in - load/refresh tokens
+      console.log('[SWAP] Loading tokens after login');
       loadAvailableTokens();
-    } else if (accountId === null && (selectedTokenIn || selectedTokenOut)) {
-      // User logged out - reset tokens
-      console.log('User logged out, resetting tokens');
+    } else if (accountId === null) {
+      // User logged out - reset ALL state
+      console.log('[SWAP] User logged out, resetting all state');
       setSelectedTokenIn(null);
       setSelectedTokenOut(null);
       setQuote(null);
       setInputAmount("");
+      setAvailableTokens([]);
+      setError("");
+      setSuccess("");
     }
   }, [accountId]);
 
@@ -522,9 +525,10 @@ export const Swap = () => {
               !accountId
             }
           >
+            {console.log('[SWAP] Button disabled check - accountId:', accountId, 'selectedTokenIn:', !!selectedTokenIn, 'selectedTokenOut:', !!selectedTokenOut)}
             {isLoading ? "Processing..." : `Swap`}
           </button>
-          <NEAR_AUTH_BUTTON />
+          <SWAP_AUTH_BUTTON />
         </div>
         <p>powered by intear</p>
       </div>

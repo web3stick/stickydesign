@@ -1,4 +1,3 @@
-import * as near from 'fastintear';
 import { useEffect, useState } from 'preact/hooks';
 
 
@@ -12,9 +11,8 @@ export function useFastIntearAuth(): {
   const [auth, setAuth] = useState<AuthState>({ loggedIn: false });
 
   useEffect(() => {
-    // Only check auth status on mount
     const status = near.authStatus();
-    console.log('[FastINTEAR] Initial auth status check:', status);
+    console.log('[FastINTEAR] Auth status on mount:', status);
 
     if (status === 'SignedIn') {
       const accountId = near.accountId();
@@ -22,8 +20,6 @@ export function useFastIntearAuth(): {
       if (accountId) {
         setAuth({ loggedIn: true, accountId });
       }
-    } else {
-      setAuth({ loggedIn: false });
     }
   }, []);
 
@@ -40,10 +36,7 @@ export function useFastIntearAuth(): {
   const logout = () => {
     console.log('[FastINTEAR] Logging out...');
     near.signOut();
-    
-    // Immediately update the state and don't rely on near.authStatus()
     setAuth({ loggedIn: false });
-    
     console.log('[FastINTEAR] Logged out.');
   };
 
