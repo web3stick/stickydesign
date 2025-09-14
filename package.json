@@ -10,6 +10,7 @@
     "web4_mainnet": "web4-deploy dist stickydesign.near --nearfs"
   },
   "dependencies": {
+    "fastintear": "^0.2.5",
     "preact": "^10.27.1",
     "preact-router": "^4.1.2",
     "prismjs": "^1.30.0"
