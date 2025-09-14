@@ -6,3 +6,4 @@
 - [ ] keep conslo logging
 - [ ] create doc on how to reuse
 - [ ] advanced state mangaent do we need it? it works so why chage it.
+- [ ] use lucide iocn "ArrowDownUp"
