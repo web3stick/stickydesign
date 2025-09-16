@@ -1,0 +1,7 @@
+a {
+   text-decoration: none;
+   color: var(--color-blue);
+}
+a:hover {
+    color: var(--color-purple);
+}

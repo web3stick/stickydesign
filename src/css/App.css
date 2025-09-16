@@ -1,7 +1,11 @@
 body, main {
     margin: 0;
     padding: 0;
+    
+    align-items: center;
+    text-align: center;
 }
+
 
 /*font */
 body {
@@ -10,13 +14,12 @@ body {
 
 header, section {
     min-height: 100vh;
-    /* width: 100%; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    width: 700px;
+    max-width: 90%;
   
-    padding: 20px;
+    padding-top: 100px;
     margin: 0px;
+    
+    /*border: 1px sold black;*/
+    display: inline-block;
 }

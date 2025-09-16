@@ -11,6 +11,7 @@ import { ROUTES } from "./ts/routes.ts";
 
 // design
 import STICKY_design_nav from "./design/nav_header.tsx";
+import STICKY_design_nav_section from "./design/nav_section.tsx";
 import STICKY_design_header from "./design/header.tsx";
 import STICKY_design_color from "./design/color/color.tsx";
 import STICKY_design_button from "./design/button/button.tsx";
@@ -25,6 +26,7 @@ const App = () => {
       <STICKY_design_nav/>
       <Router>
         <Route path={ROUTES.home.path} component={STICKY_design_header} />
+        <Route path={ROUTES.nav.path} component={STICKY_design_nav_section} />
         <Route path={ROUTES.color.path} component={STICKY_design_color} />
         <Route path={ROUTES.button.path} component={STICKY_design_button} />
         <Route path={ROUTES.near.path} component={STICKY_design_near} />

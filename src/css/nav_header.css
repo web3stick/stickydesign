@@ -1,6 +1,6 @@
 nav {
     position: fixed;
-    background-color: rgba(255, 247, 163, 0.20);
+    background-color: rgba(255, 247, 163, 0.2);
     width: 700px;
     left: 50%;
     right: 50%;
@@ -8,8 +8,20 @@ nav {
     transform: translateX(-50%);
     max-width: 90%;
     backdrop-filter: blur(3px);
-    text-align: center;
     border-radius: 10px;
-    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
 }
 
+
+
+/*.NAV_Menu_icon {
+    color: var(--color-blue);
+    cursor: pointer;
+}
+
+.NAV_Menu_icon:hover {
+    color: var(--color-purple);
+}*/
