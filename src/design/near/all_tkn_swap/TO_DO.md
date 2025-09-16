@@ -9,3 +9,9 @@
 - [ ] use lucide iocn "ArrowDownUp"
 - [ ] clean up old code/css
 - [ ] maybe get the token icon directly form the token list
+- [ ] the token-dropdown-menu has siddeways scroll
+
+
+---
+
+copyright 2025 by web3stick.near
