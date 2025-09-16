@@ -15,6 +15,8 @@ const STICKY_design_nav_section = () => {
         near
         <br/>
         <a href={ROUTES.near_all_swap.path}>{ROUTES.near_all_swap.label}</a>
+        <br/>
+        <a href={ROUTES.near_auth_button.path}>{ROUTES.near_auth_button.label}</a>
       </p>
     </section>
   );
