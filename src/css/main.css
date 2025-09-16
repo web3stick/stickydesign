@@ -5,5 +5,6 @@
 /* css  */
 @import url(./color.css);
 @import url(./App.css);
+@import url(./nav_header.css);
 @import url(./code.css);
 @import url(./footer.css);
