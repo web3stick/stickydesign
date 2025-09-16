@@ -9,6 +9,10 @@ const STICKY_design_nav_section = () => {
         basic
         <br/>
         <a href={ROUTES.color.path}>{ROUTES.color.label}</a>
+        <br/>
+        <a href={ROUTES.button.path}>{ROUTES.button.label}</a>
+        <br/>
+        near
       </p>
     </section>
   );
