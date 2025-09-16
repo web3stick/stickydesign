@@ -1,7 +1,9 @@
+import { useEffect } from "preact/hooks";
+// import near
+import '../near.config' // this configs fastintear
 import { useSwapAuth } from "./SWAP_auth";
 import SWAP_AUTH_BUTTON from "./SWAP_auth_button";
 import { SwapUI } from "./SWAP_ui";
-import { useEffect } from "preact/hooks";
 import { useSwapStore } from "./swapStore";
 
 export const Swap = () => {
