@@ -2,10 +2,9 @@ import { useEffect } from "preact/hooks";
 import Prism from "prismjs";
 import "prismjs/themes/prism-okaidia.css";
 import './near.config'
-import './near.auth'
 
 // near tsx
-import NEAR_AUTH_BUTTON from "./near_auth_button";
+import NEAR_AUTH_BUTTON from "./auth_button/near_auth_button";
 import { Swap } from './swap/SWAP_main';
 
 // STICKY_design_near
