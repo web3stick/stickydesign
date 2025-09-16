@@ -6,7 +6,8 @@ import SWAP_AUTH_BUTTON from "./SWAP_auth_button";
 import { SwapUI } from "./SWAP_ui";
 import { useSwapStore } from "./swapStore";
 
-export const Swap = () => {
+// NEAR_ALL_TOKEN_Swap
+export const NEAR_ALL_TOKEN_Swap_FULL_COMPONENT = () => {
   const { auth } = useSwapAuth();
   // We no longer need to derive accountId here since it's managed by the store
   // But we still need to update the store when auth changes
@@ -46,7 +47,7 @@ export const Swap = () => {
         </div>
         <SWAP_AUTH_BUTTON />
         <SwapUI />
-        <p>powered by intear, designed by sleet</p>
+        <p>designed by sleet, powered by intear</p>
       </div>
     </div>
   );
