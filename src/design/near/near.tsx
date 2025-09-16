@@ -5,7 +5,7 @@ import './near.config'
 
 // near tsx
 import NEAR_AUTH_BUTTON from "./auth_button/near_auth_button";
-import { Swap } from './swap/SWAP_main';
+import { Swap } from './all_tkn_swap/SWAP_main';
 
 // STICKY_design_near
 const STICKY_design_near = () => {

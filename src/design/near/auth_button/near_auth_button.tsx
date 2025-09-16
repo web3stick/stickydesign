@@ -1,5 +1,7 @@
 // import
 import type { FunctionalComponent } from 'preact';
+// import near
+import '../near.config' // this configs fastintear
 import { useFastIntearAuth } from './near.auth';
 
 
