@@ -9,7 +9,7 @@
 - [ ] use lucide iocn "ArrowDownUp"
 - [ ] clean up old code/css
 - [x] maybe get the token icon directly form the token list, would not work
-- [ ] the token-dropdown-menu has siddeways scroll content too wide
+- [x] the token-dropdown-menu has siddeways scroll content too wide
 
 
 ---
