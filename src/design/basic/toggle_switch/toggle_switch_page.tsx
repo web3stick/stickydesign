@@ -73,6 +73,7 @@ const STICKY_design_toggle_switch_page = () => {
       <h2>How to Reuse</h2>
       <p>
         The STICKY_toggle_switch component can be easily reused throughout your application.
+        <br/>
         Simply import it and pass the desired props:
       </p>
 
