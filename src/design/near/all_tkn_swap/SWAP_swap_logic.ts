@@ -11,25 +11,30 @@ export type {
   SwapParams
 } from "./SWAP_swap_logic_types";
 
-// Re-export all functions
+// Re-export token functions
 export {
-  // Token functions
   getAvailableTokens,
   fetchTokenMetadata,
   fetchTokenBalance,
   fetchTokenPrice,
-  prepareSwapToken,
-  
-  // Quote functions
+  prepareSwapToken
+} from "./SWAP_swap_logic_tokens";
+
+// Re-export quote functions
+export {
   fetchSwapQuote,
-  fetchSwapQuoteForOutput,
-  
-  // Utility functions
+  fetchSwapQuoteForOutput
+} from "./SWAP_swap_logic_quotes";
+
+// Re-export utility functions
+export {
   formatTokenAmount,
   toRawAmount,
   selectRoute,
-  validateSwapParams,
-  
-  // Execution functions
+  validateSwapParams
+} from "./SWAP_swap_logic_utils";
+
+// Re-export execution functions
+export {
   executeSwap
-} from "./SWAP_swap_logic_tokens";
+} from "./SWAP_swap_logic_execution";
