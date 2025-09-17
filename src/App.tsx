@@ -14,7 +14,7 @@ import STICKY_design_nav from "./design/nav_header.tsx";
 import STICKY_design_nav_section from "./design/nav_section.tsx";
 import STICKY_design_header from "./design/header.tsx";
 import STICKY_design_color from "./design/basic/color/color.tsx";
-import STICKY_design_button from "./design/basic/button/button.tsx";
+import STICKY_design_button from "./design/basic/button/button_page.tsx";
 // import STICKY_design_near from "./design/near/near.tsx";
 import STICKY_design_near_all_tkn_swap from "./design/near/near_all_tkn_swap.tsx";
 import STICKY_design_near_auth_button from "./design/near/near_auth_button.tsx";
