@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "rsbuild build",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit",
+    "build": "npm run clean && rsbuild build",
     "dev": "rsbuild dev --open",
     "preview": "rsbuild preview",
     "web4_mainnet": "web4-deploy dist stickydesign.near --nearfs"

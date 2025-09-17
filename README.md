@@ -6,7 +6,8 @@
 bun i
 bun run dev
 bun run build
-bun tsc --noEmit
+bun run clean
+bun run typecheck
 
 
 # web4 deploy
