@@ -5,6 +5,7 @@ import "prismjs/themes/prism-okaidia.css";
 // import css
 import "./button.css";
 import button_CSS from "./button.css?raw";
+import STICKY_button from "./button_componenet";
 
 // STICKY_design_button_page
 const STICKY_design_button_page = () => {
@@ -18,7 +19,7 @@ const STICKY_design_button_page = () => {
       <p>button for sticky</p>
       
       {/*STICKY_button*/}
-      <button>STICKY_button</button>
+      <STICKY_button text="STICKY_button" />
 
       {/*pre*/}
       <pre>
