@@ -27,7 +27,7 @@ const STICKY_design_tools = () => {
     {
       name: "FASTINTEAR",
       description: "Simple, intuitive JavaScript library for interacting with the NEAR Protocol blockchain.",
-      link: "github.com/elliotBraem/fastintear"
+      link: "https://github.com/elliotBraem/fastintear"
     }
   ];
 
