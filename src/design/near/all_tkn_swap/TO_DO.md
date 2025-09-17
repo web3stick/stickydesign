@@ -10,7 +10,7 @@
 - [ ] clean up old code/css
 - [x] maybe get the token icon directly form the token list, would not work
 - [x] the token-dropdown-menu has siddeways scroll content too wide
-- [ ] use custom token list, or create a custom favoirte list to have some tokens at the top.
+- [x] use custom token list, or create a custom favoirte list to have some tokens at the top.
 
 
 ---
