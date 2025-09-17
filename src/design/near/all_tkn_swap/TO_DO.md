@@ -6,7 +6,7 @@
 - [ ] keep conslo logging clean
 - [ ] create doc on how to reuse
 - [ ] advanced state mangaent do we need it? it works so why chage it.
-- [ ] use lucide iocn "ArrowDownUp"
+- [x] use lucide iocn "ArrowDownUp"
 - [ ] clean up old code/css
 - [x] maybe get the token icon directly form the token list, would not work
 - [x] the token-dropdown-menu has siddeways scroll content too wide

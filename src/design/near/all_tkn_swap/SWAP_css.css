@@ -13,7 +13,7 @@
     --color-red: #FF8A8A;
     --color-orange: #FFC58A;
     /* Additional custom colors for swap component */
-    --swap-primary: var(--color-purple);
+    --swap-primary: var(--color-blue);
     --swap-secondary: var(--color-yellow);
     --swap-accent: var(--color-green);
 }
@@ -254,7 +254,7 @@
 
 .swap-arrow-icon:hover {
     transform: scale(1.1);
-    color: var(--swap-primary);
+    color: var(--color-purple);
 }
 
 .swap-settings {
@@ -359,7 +359,7 @@
 }
 
 .swap-auth-button {
-    background-color: var(--swap-primary);
+    background-color: var(--color-blue);
     color: white;
     border: none;
     border-radius: 4px;
@@ -373,7 +373,7 @@
 }
 
 .swap-auth-button:hover:not(:disabled) {
-    background-color: var(--color-blue);
+    background-color: var(--color-purple);
 }
 
 .swap-auth-button:disabled {
