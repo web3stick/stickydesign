@@ -168,6 +168,7 @@ export async function prepareSwapToken(
     }
 
     // For non-native tokens, fetch both metadata and price
+    // For top tokens, fetchTokenMetadata will use cached data
     const [metadata, priceUsd] = await Promise.all([
       fetchTokenMetadata(simpleToken.contract_id),
       fetchTokenPrice(simpleToken.contract_id),

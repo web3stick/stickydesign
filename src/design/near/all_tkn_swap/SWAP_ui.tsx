@@ -97,23 +97,31 @@ export const SwapUI = ({}: SwapUIProps) => {
     setIsLoadingTokens(false);
 
     if (tokens.length > 0) {
-      // Set NEAR as the default "from" token
-      const nearToken = tokens.find((t) => t.isNative);
-      if (nearToken) {
-        selectToken(nearToken, "in");
+      // Only set default tokens if none are already selected
+      const tokenIn = useSwapStore.getState().selectedTokenIn;
+      const tokenOut = useSwapStore.getState().selectedTokenOut;
+      
+      if (!tokenIn) {
+        // Set NEAR as the default "from" token
+        const nearToken = tokens.find((t) => t.isNative);
+        if (nearToken) {
+          await selectToken(nearToken, "in");
+        }
       }
       
-      // Set SHIT token as the default "to" token (from our top tokens)
-      const shitToken = tokens.find(
-        (t) => t.contract_id === TOP_TOKENS.SHIT,
-      );
-      if (shitToken) {
-        selectToken(shitToken, "out");
-      } else if (!shitToken && !nearToken) {
-        // Fallback to first available token if neither is found
-        selectToken(tokens[0], "in");
-        if (tokens.length > 1) {
-          selectToken(tokens[1], "out");
+      if (!tokenOut) {
+        // Set SHIT token as the default "to" token (from our top tokens)
+        const shitToken = tokens.find(
+          (t) => t.contract_id === TOP_TOKENS.SHIT,
+        );
+        if (shitToken) {
+          await selectToken(shitToken, "out");
+        } else if (!shitToken && !tokenIn) {
+          // Fallback to first available token if neither is found
+          await selectToken(tokens[0], "in");
+          if (tokens.length > 1) {
+            await selectToken(tokens[1], "out");
+          }
         }
       }
     }

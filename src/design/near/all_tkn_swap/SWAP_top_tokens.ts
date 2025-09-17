@@ -24,6 +24,9 @@ export const TOP_TOKEN_CONTRACTS: Record<string, string> = Object.fromEntries(
 // Cache for token metadata
 const tokenMetadataCache: Record<string, TokenMetadata> = {};
 
+// Ongoing fetch promises to prevent duplicate requests
+const ongoingFetches: Record<string, Promise<TokenMetadata>> = {};
+
 // Function to check if a token is a top token
 export function isTopToken(contractId: string): boolean {
   return contractId in TOP_TOKEN_CONTRACTS;
@@ -41,27 +44,43 @@ async function fetchTokenMetadata(contractId: string): Promise<TokenMetadata> {
     return tokenMetadataCache[contractId];
   }
 
+  // Return existing promise if fetch is already in progress
+  if (ongoingFetches[contractId]) {
+    return ongoingFetches[contractId];
+  }
+
   try {
     console.log(`🔍 Fetching ft_metadata for contract: ${contractId}`);
 
-    const result = await near.view({
+    // Create and store the fetch promise
+    ongoingFetches[contractId] = near.view({
       contractId,
       methodName: "ft_metadata",
       args: {},
+    }).then(result => {
+      const metadata: TokenMetadata = {
+        name: result.name || contractId,
+        symbol: result.symbol || contractId.split(".")[0].toUpperCase(),
+        decimals: result.decimals || 18,
+        icon: result.icon,
+      };
+
+      // Cache the metadata
+      tokenMetadataCache[contractId] = metadata;
+      
+      // Clean up the ongoing fetch
+      delete ongoingFetches[contractId];
+      
+      return metadata;
     });
 
-    const metadata: TokenMetadata = {
-      name: result.name || contractId,
-      symbol: result.symbol || contractId.split(".")[0].toUpperCase(),
-      decimals: result.decimals || 18,
-      icon: result.icon,
-    };
-
-    // Cache the metadata
-    tokenMetadataCache[contractId] = metadata;
-    return metadata;
+    return await ongoingFetches[contractId];
   } catch (error) {
     console.error(`❌ Failed to fetch metadata for ${contractId}:`, error);
+    
+    // Clean up the ongoing fetch on error
+    delete ongoingFetches[contractId];
+    
     const defaultMetadata: TokenMetadata = {
       name: contractId,
       symbol: contractId.split(".")[0].toUpperCase(),
