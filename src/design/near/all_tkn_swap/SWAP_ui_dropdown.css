@@ -90,3 +90,18 @@
     overflow-x: hidden;
     box-sizing: border-box;
 }
+
+/* Top token styles */
+.token-dropdown-item-top {
+    background-color: rgba(255, 215, 0, 0.1); /* Light gold background */
+}
+
+.token-dropdown-item-top:hover {
+    background-color: rgba(255, 215, 0, 0.2); /* Slightly darker gold on hover */
+}
+
+.token-dropdown-item-top-badge {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: #FFD700; /* Gold color */
+}

@@ -9,6 +9,7 @@ import type {
   SwapToken, 
   TokenMetadata 
 } from "./SWAP_swap_logic_types";
+import { isTopToken, getCachedTokenMetadata } from "./SWAP_top_tokens";
 
 export async function getAvailableTokens(): Promise<SimpleToken[]> {
   const tokensFromDB = await getTokensFromDB();
@@ -40,6 +41,15 @@ export async function getAvailableTokens(): Promise<SimpleToken[]> {
 export async function fetchTokenMetadata(
   contractId: string,
 ): Promise<TokenMetadata> {
+  // Check if we have cached metadata for top tokens
+  if (isTopToken(contractId)) {
+    const cachedMetadata = getCachedTokenMetadata(contractId);
+    if (cachedMetadata) {
+      console.log(`Using cached metadata for top token: ${contractId}`);
+      return cachedMetadata;
+    }
+  }
+
   try {
     console.log(`🔍 Fetching ft_metadata for contract: ${contractId}`);
 

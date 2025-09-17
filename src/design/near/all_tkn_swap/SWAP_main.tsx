@@ -5,6 +5,7 @@ import { useSwapAuth } from "./SWAP_auth";
 import SWAP_AUTH_BUTTON from "./SWAP_auth_button";
 import { SwapUI } from "./SWAP_ui";
 import { useSwapStore } from "./swapStore";
+import { fetchTopTokensMetadata } from "./SWAP_top_tokens";
 
 // NEAR_ALL_TOKEN_Swap
 export const NEAR_ALL_TOKEN_Swap_FULL_COMPONENT = () => {
@@ -18,6 +19,14 @@ export const NEAR_ALL_TOKEN_Swap_FULL_COMPONENT = () => {
     console.log("[SWAP_MAIN] Auth state changed, updating store:", auth);
     setStoreAccountId(auth.loggedIn ? auth.accountId : null);
   }, [auth, setStoreAccountId]);
+
+  // Fetch metadata for top tokens when component mounts
+  useEffect(() => {
+    console.log("[SWAP_MAIN] Fetching metadata for top tokens");
+    fetchTopTokensMetadata().catch(error => {
+      console.error("[SWAP_MAIN] Failed to fetch top tokens metadata:", error);
+    });
+  }, []);
 
   // Simple key that changes on auth state to force complete re-render
   const componentKey = auth.loggedIn

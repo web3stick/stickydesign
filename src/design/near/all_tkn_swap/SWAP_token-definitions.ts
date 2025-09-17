@@ -1,6 +1,7 @@
 import * as near from "fastintear";
 import type { TokenMetadata } from "./SWAP_swap_logic";
 import NearTokenSvg from "./NEAR_token.svg";
+import { TOP_TOKENS } from "./SWAP_top_tokens";
 
 export interface NativeToken {
   contract_id: string;

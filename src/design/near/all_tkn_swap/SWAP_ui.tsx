@@ -1,5 +1,6 @@
 import { useEffect } from "preact/hooks";
 import "./SWAP_ui.css";
+import "./SWAP_ui_dropdown.css";
 import { TokenIcon } from "./SWAP_TokenIcon";
 import { ArrowDownUp } from "lucide-preact";
 import {
@@ -21,6 +22,7 @@ import { SwapMessages } from "./SWAP_ui_messages";
 import { SwapButtons } from "./SWAP_ui_buttons";
 import { SwapSettings } from "./SWAP_ui_settings";
 import { SwapRouteSelection } from "./SWAP_ui_route_selection";
+import { TOP_TOKENS } from "./SWAP_top_tokens";
 
 interface SwapUIProps {
   // accountId is now managed by the store, so we don't need it as a prop
@@ -101,9 +103,9 @@ export const SwapUI = ({}: SwapUIProps) => {
         selectToken(nearToken, "in");
       }
       
-      // Set SHIT token as the default "to" token
+      // Set SHIT token as the default "to" token (from our top tokens)
       const shitToken = tokens.find(
-        (t) => t.contract_id === "shit-1170.meme-cooking.near",
+        (t) => t.contract_id === TOP_TOKENS.SHIT,
       );
       if (shitToken) {
         selectToken(shitToken, "out");
