@@ -3,7 +3,7 @@ import { ROUTES } from "../ts/routes";
 // card stuff
 import STICKY_button from "./basic/button/button_componenet";
 import NEAR_AUTH_BUTTON from "./near/auth_button/near_auth_button";
-import { ArrowDownUp, Palette } from "lucide-preact";
+import { ArrowDownUp, Palette, Wrench } from "lucide-preact";
 
 // STICKY_design_nav_section
 const STICKY_design_nav_section = () => {
@@ -18,6 +18,14 @@ const STICKY_design_nav_section = () => {
               <Palette />
             </div>
             <div class="label-container">{ROUTES.color.label}</div>
+          </div>
+        </a>
+        <a href={ROUTES.tools.path} class="card-link">
+          <div class="card">
+            <div class="preview-container">
+              <Wrench />
+            </div>
+            <div class="label-container">{ROUTES.tools.label}</div>
           </div>
         </a>
         <a href={ROUTES.button.path} class="card-link">

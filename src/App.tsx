@@ -14,6 +14,7 @@ import STICKY_design_nav from "./design/nav_header.tsx";
 import STICKY_design_nav_section from "./design/nav_section.tsx";
 import STICKY_design_header from "./design/header.tsx";
 // basic
+import STICKY_design_tools from "./design/basic/tools/tools.tsx";
 import STICKY_design_color from "./design/basic/color/color.tsx";
 import STICKY_design_button_page from "./design/basic/button/button_page.tsx";
 // near
@@ -31,8 +32,11 @@ const App = () => {
       <Router>
         <Route path={ROUTES.home.path} component={STICKY_design_header} />
         <Route path={ROUTES.nav.path} component={STICKY_design_nav_section} />
+        {/*basic*/}
         <Route path={ROUTES.color.path} component={STICKY_design_color} />
         <Route path={ROUTES.button.path} component={STICKY_design_button_page} />
+        <Route path={ROUTES.tools.path} component={STICKY_design_tools} />
+        {/*near*/}
         <Route path={ROUTES.near_all_swap.path} component={STICKY_design_near_all_tkn_swap} />
         <Route path={ROUTES.near_auth_button.path} component={STICKY_design_near_auth_button} />
         <Route default component={STICKY_design_header} />
