@@ -1,6 +1,7 @@
 import { useEffect } from "preact/hooks";
 import "./SWAP_css.css";
 import { TokenIcon } from "./SWAP_TokenIcon";
+import { ArrowDownUp } from "lucide-preact";
 import {
   executeSwap,
   fetchSwapQuote,
@@ -445,13 +446,11 @@ export const SwapUI = ({}: SwapUIProps) => {
         </div>
 
         <div className="swap-arrow-container">
-          <button
-            type="button"
-            className="swap-arrow-button"
+          <ArrowDownUp 
+            className="swap-arrow-icon" 
+            size={16} 
             onClick={handleSwitchTokens}
-          >
-            <div className="swap-arrow-icon" />
-          </button>
+          />
         </div>
 
         <div className="swap-input-group">

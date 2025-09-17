@@ -237,59 +237,24 @@
     z-index: 1;
 }
 
-.swap-arrow-button {
+.swap-arrow-icon {
     background-color: var(--container-background);
-    border: 2px solid var(--swap-secondary);
-    border-radius: 50%;
     width: 36px;
     height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s;
     position: relative;
     z-index: 10;
+    color: var(--color-blue);
+    padding: 0;
 }
 
-.swap-arrow-button:hover {
+.swap-arrow-icon:hover {
     transform: scale(1.1);
-}
-
-/* Custom CSS-based arrow icon */
-.swap-arrow-icon {
-    position: relative;
-    width: 16px;
-    height: 16px;
-}
-
-/* Up arrow */
-.swap-arrow-icon::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-bottom: 4px solid var(--text-color);
-}
-
-/* Down arrow */
-.swap-arrow-icon::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    border-top: 4px solid var(--text-color);
+    color: var(--swap-primary);
 }
 
 .swap-settings {
