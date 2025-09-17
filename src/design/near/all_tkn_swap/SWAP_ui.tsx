@@ -584,7 +584,7 @@ export const SwapUI = ({}: SwapUIProps) => {
             !accountId
           }
         >
-          {isLoading ? "Processing..." : `Swap`}
+          {isLoading ? "Processing..." : `SWAP`}
         </button>
       </div>
     </>
