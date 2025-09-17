@@ -8,8 +8,8 @@
 - [ ] advanced state mangaent do we need it? it works so why chage it.
 - [ ] use lucide iocn "ArrowDownUp"
 - [ ] clean up old code/css
-- [ ] maybe get the token icon directly form the token list
-- [ ] the token-dropdown-menu has siddeways scroll
+- [x] maybe get the token icon directly form the token list, would not work
+- [ ] the token-dropdown-menu has siddeways scroll content too wide
 
 
 ---
