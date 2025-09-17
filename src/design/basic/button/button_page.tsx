@@ -25,21 +25,16 @@ const STICKY_design_button_page = () => {
 
       <h2>How to Reuse</h2>
       <p>
-        The STICKY_button component can be easily reused throughout your application.
+        just use a button how you normaly would
         <br />
-        Simply import it and pass the desired text as a prop:
+        don't make it complicated with a reusable component
       </p>
 
       <pre>
-        <code className="language-js">{buttonExample}</code>
+        <code className="language-html">{buttonExample}</code>
       </pre>
 
-      <h2>Component Code</h2>
-      <pre>
-        <code className="language-js">{button_Component}</code>
-      </pre>
-
-      <h2>CSS Code</h2>
+      <h2>CSS</h2>
       <pre>
         <code className="language-css">{button_CSS}</code>
       </pre>
