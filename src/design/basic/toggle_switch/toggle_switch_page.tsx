@@ -12,6 +12,7 @@ const STICKY_design_toggle_switch_page = () => {
   const [defaultMessage, setDefaultMessage] = useState("");
   const [initialOnMessage, setInitialOnMessage] = useState("");
   const [customMessage, setCustomMessage] = useState("");
+  const [noLabelMessage, setNoLabelMessage] = useState("");
 
   useEffect(() => {
     Prism.highlightAll();
@@ -56,6 +57,18 @@ const STICKY_design_toggle_switch_page = () => {
               }} 
             />
             {customMessage && <p>Message: {customMessage}</p>}
+          </div>
+
+          <div>
+            <h3>No Labels</h3>
+            <STICKY_toggle_switch 
+              onToggle={(isToggled) => {
+                const msg = isToggled ? "Switched On" : "Switched Off";
+                setNoLabelMessage(msg);
+                console.log(msg);
+              }} 
+            />
+            {noLabelMessage && <p>Message: {noLabelMessage}</p>}
           </div>
         </div>
       </div>

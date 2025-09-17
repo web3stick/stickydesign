@@ -10,8 +10,8 @@ interface ToggleSwitchProps {
 }
 
 const STICKY_toggle_switch: FunctionalComponent<ToggleSwitchProps> = ({
-  leftText = "Off",
-  rightText = "On",
+  leftText,
+  rightText,
   onToggle,
   initialState = false
 }) => {
@@ -25,9 +25,13 @@ const STICKY_toggle_switch: FunctionalComponent<ToggleSwitchProps> = ({
     }
   };
 
+  const showLabels = leftText !== undefined || rightText !== undefined;
+  const hasLeftText = leftText !== undefined;
+  const hasRightText = rightText !== undefined;
+
   return (
     <div class="switch-container">
-      <span class="switch-label">{leftText}</span>
+      {showLabels && hasLeftText && <span class="switch-label">{leftText}</span>}
       <label class="switch">
         <input
           type="checkbox"
@@ -36,7 +40,7 @@ const STICKY_toggle_switch: FunctionalComponent<ToggleSwitchProps> = ({
         />
         <span class="slider"></span>
       </label>
-      <span class="switch-label">{rightText}</span>
+      {showLabels && hasRightText && <span class="switch-label">{rightText}</span>}
     </div>
   );
 };
