@@ -21,6 +21,9 @@ interface SwapState {
   inputAmount: string;
   setInputAmount: (amount: string) => void;
   
+  outputAmount: string;
+  setOutputAmount: (amount: string) => void;
+  
   quote: SwapQuote | null;
   setQuote: (quote: SwapQuote | null) => void;
   
@@ -83,6 +86,9 @@ export const useSwapStore = create<SwapState>()(
     inputAmount: '',
     setInputAmount: (inputAmount) => set({ inputAmount }),
     
+    outputAmount: '',
+    setOutputAmount: (outputAmount) => set({ outputAmount }),
+    
     quote: null,
     setQuote: (quote) => set({ quote }),
     
@@ -125,6 +131,7 @@ export const useSwapStore = create<SwapState>()(
         selectedTokenIn: null,
         selectedTokenOut: null,
         inputAmount: '',
+        outputAmount: '',
         quote: null,
         error: '',
         success: '',

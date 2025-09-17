@@ -5,6 +5,7 @@ import { ArrowDownUp } from "lucide-preact";
 import {
   executeSwap,
   fetchSwapQuote,
+  fetchSwapQuoteForOutput,
   formatTokenAmount,
   getAvailableTokens,
   prepareSwapToken,
@@ -42,6 +43,8 @@ export const SwapUI = ({}: SwapUIProps) => {
     setIsLoadingTokenOut,
     inputAmount,
     setInputAmount,
+    outputAmount,
+    setOutputAmount,
     quote,
     setQuote,
     slippage,
@@ -112,6 +115,9 @@ export const SwapUI = ({}: SwapUIProps) => {
         }
       }
     }
+    
+    // Clear output amount when tokens are loaded
+    setOutputAmount("");
   };
 
   const selectToken = async (simpleToken: SimpleToken, type: "in" | "out") => {
@@ -145,6 +151,7 @@ export const SwapUI = ({}: SwapUIProps) => {
   const handleAmountChange = (value: string) => {
     if (!/^\d*\.?\d*$/.test(value)) return;
     setInputAmount(value);
+    setOutputAmount(""); // Clear output when input is changed
     setQuote(null);
     if (value && parseFloat(value) > 0 && selectedTokenIn && selectedTokenOut) {
       debouncedFetchQuote(value);
@@ -158,6 +165,7 @@ export const SwapUI = ({}: SwapUIProps) => {
       selectedTokenIn.metadata.decimals,
     );
     setInputAmount(maxAmount);
+    setOutputAmount(""); // Clear output when input is changed
     if (parseFloat(maxAmount) > 0) {
       debouncedFetchQuote(maxAmount);
     }
@@ -192,6 +200,7 @@ export const SwapUI = ({}: SwapUIProps) => {
     }
     
     setInputAmount(formattedAmount);
+    setOutputAmount(""); // Clear output when input is changed
     if (percentageAmount > 0) {
       debouncedFetchQuote(formattedAmount);
     }
@@ -207,9 +216,21 @@ export const SwapUI = ({}: SwapUIProps) => {
       setIsDropdownOpenOut(false);
     }
     setQuote(null);
+    
+    // Clear output amount when tokens change
+    if (type === "in") {
+      setOutputAmount("");
+    } else if (type === "out") {
+      setOutputAmount("");
+    }
+    
     await selectToken(simpleToken, type);
-    if (inputAmount && parseFloat(inputAmount) > 0) {
-      debouncedFetchQuote(inputAmount);
+    if ((inputAmount && parseFloat(inputAmount) > 0) || (outputAmount && parseFloat(outputAmount) > 0)) {
+      if (inputAmount && parseFloat(inputAmount) > 0) {
+        debouncedFetchQuote(inputAmount);
+      } else if (outputAmount && parseFloat(outputAmount) > 0) {
+        debouncedFetchQuoteForOutput(outputAmount);
+      }
     }
   };
 
@@ -218,6 +239,14 @@ export const SwapUI = ({}: SwapUIProps) => {
     return (amount: string) => {
       clearTimeout(timeoutId);
       timeoutId = window.setTimeout(() => fetchQuoteData(amount), 500);
+    };
+  })();
+
+  const debouncedFetchQuoteForOutput = (() => {
+    let timeoutId: number;
+    return (amount: string) => {
+      clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(() => fetchQuoteDataForOutput(amount), 500);
     };
   })();
 
@@ -246,6 +275,41 @@ export const SwapUI = ({}: SwapUIProps) => {
         rawAmount,
         slippage,
         selectedTokenIn.metadata.decimals,
+        accountId || undefined,
+      );
+      setQuote(quoteData);
+    } catch (err) {
+      setError("Failed to get swap quote. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchQuoteDataForOutput = async (amount: string) => {
+    if (
+      !selectedTokenIn ||
+      !selectedTokenOut ||
+      !amount ||
+      parseFloat(amount) <= 0
+    )
+      return;
+
+    setIsLoading(true);
+    setError("");
+
+    try {
+      const rawAmount = toRawAmount(amount, selectedTokenOut.metadata.decimals);
+      const tokenOut = selectedTokenOut.isNative
+        ? "near"
+        : selectedTokenOut.contract_id;
+
+      // Use accountId from the store instead of the prop
+      const quoteData = await fetchSwapQuoteForOutput(
+        selectedTokenIn.contract_id,
+        tokenOut,
+        rawAmount,
+        slippage,
+        selectedTokenOut.metadata.decimals,
         accountId || undefined,
       );
       setQuote(quoteData);
@@ -304,9 +368,16 @@ export const SwapUI = ({}: SwapUIProps) => {
 
   const handleSwitchTokens = () => {
     const tempToken = selectedTokenIn;
+    const tempAmount = inputAmount;
+    
     setSelectedTokenIn(selectedTokenOut);
     setSelectedTokenOut(tempToken);
-    setInputAmount("");
+    
+    // Swap the amounts instead of clearing them
+    setInputAmount(outputAmount);
+    setOutputAmount(tempAmount);
+    
+    // Clear the quote as it's no longer valid
     setQuote(null);
   };
 
@@ -432,7 +503,10 @@ export const SwapUI = ({}: SwapUIProps) => {
               type="text"
               className="swap-amount-input"
               placeholder="0.0"
-              value={inputAmount}
+              value={quote && outputAmount ? formatTokenAmount(
+                quote.inputAmount,
+                selectedTokenIn?.metadata.decimals || 18,
+              ) : inputAmount}
               onChange={(e) =>
                 handleAmountChange((e.target as HTMLInputElement).value)
               }
@@ -495,17 +569,21 @@ export const SwapUI = ({}: SwapUIProps) => {
           <div className="swap-amount-section">
             <input
               type="text"
-              className="swap-amount-input swap-amount-input-readonly"
+              className="swap-amount-input"
               placeholder="0.0"
-              value={
-                quote
-                  ? formatTokenAmount(
-                      quote.outputAmount,
-                      selectedTokenOut?.metadata.decimals || 18,
-                    )
-                  : ""
-              }
-              readOnly
+              value={quote ? formatTokenAmount(
+                quote.outputAmount,
+                selectedTokenOut?.metadata.decimals || 18,
+              ) : outputAmount}
+              onChange={(e) => {
+                const value = (e.target as HTMLInputElement).value;
+                setOutputAmount(value);
+                setInputAmount(""); // Clear input when output is changed
+                setQuote(null);
+                if (value && parseFloat(value) > 0 && selectedTokenIn && selectedTokenOut) {
+                  debouncedFetchQuoteForOutput(value);
+                }
+              }}
             />
             {quote && quote.outputValueUsd ? (
               <div className="swap-amount-value">
