@@ -30,7 +30,7 @@ const STICKY_toggle_switch: FunctionalComponent<ToggleSwitchProps> = ({
   const hasRightText = rightText !== undefined;
 
   return (
-    <div class="switch-container">
+    <div class="STICKY_toggle_switch_container">
       {showLabels && hasLeftText && <span class="switch-label">{leftText}</span>}
       <label class="switch">
         <input

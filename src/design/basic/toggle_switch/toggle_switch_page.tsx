@@ -2,7 +2,7 @@ import { useEffect, useState } from "preact/hooks";
 import Prism from "prismjs";
 import "prismjs/themes/prism-okaidia.css";
 
-import "./toggle_switch.css";
+// import "./toggle_switch.css";
 import toggleSwitchCSS from "./toggle_switch.css?raw";
 import STICKY_toggle_switch from "./toggle_switch_component";
 import toggleSwitchComponent from "./toggle_switch_component?raw";

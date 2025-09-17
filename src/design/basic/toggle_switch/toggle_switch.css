@@ -1,4 +1,6 @@
-.switch-container {
+/*STICKY_toggle_switch_container*/
+/*this css is only important if you have lables*/
+.STICKY_toggle_switch_container {
   display: flex;
   align-items: center;
   gap: 10px;
