@@ -3,7 +3,7 @@ import { ROUTES } from "../ts/routes";
 // card stuff
 import STICKY_button from "./basic/button/button_componenet";
 import NEAR_AUTH_BUTTON from "./near/auth_button/near_auth_button";
-import { ArrowDownUp, LogIn, Palette } from "lucide-preact";
+import { ArrowDownUp, Palette } from "lucide-preact";
 
 // STICKY_design_nav_section
 const STICKY_design_nav_section = () => {
