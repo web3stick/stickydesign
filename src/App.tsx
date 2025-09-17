@@ -33,6 +33,7 @@ const App = () => {
         <Route path={ROUTES.button.path} component={STICKY_design_button} />
         <Route path={ROUTES.near_all_swap.path} component={STICKY_design_near_all_tkn_swap} />
         <Route path={ROUTES.near_auth_button.path} component={STICKY_design_near_auth_button} />
+        <Route default component={STICKY_design_header} />
       </Router>
       <STICKY_design_footer/>
     </main>
