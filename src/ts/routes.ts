@@ -2,7 +2,7 @@
 export const ROUTES = {
   home: { path: "/", label: "HEADER" },
   nav: { path: "/nav", label: "NAV" },
-  color: { path: "/color", label: "COLOR" },
+  color: { path: "/colors", label: "COLORS" },
   tools: { path: "/tools", label: "TOOLS"},
   // basic
   button: { path: "/button", label: "BUTTON" },
