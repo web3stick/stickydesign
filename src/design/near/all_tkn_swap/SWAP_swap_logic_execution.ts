@@ -55,7 +55,7 @@ export async function executeSwap(quote: SwapQuote): Promise<void> {
   // this is going to throw errors that is fine
   // it must be this exactly
   //   await near.state._adapter.sendTransactions({
-  await near.state._adapter.sendTransactions({
+  await (near as any).state._adapter.sendTransactions({
     transactions: transactions,
   });
 }

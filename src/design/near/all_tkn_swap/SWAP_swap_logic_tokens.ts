@@ -1,5 +1,4 @@
 import * as near from "fastintear";
-import { CONFIG } from "./NEAR_config";
 import { getTokensFromDB } from "./SWAP_token_list_db";
 import {
   NATIVE_NEAR_TOKEN,

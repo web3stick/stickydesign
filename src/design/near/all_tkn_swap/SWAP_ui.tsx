@@ -11,9 +11,6 @@ import {
   prepareSwapToken,
   selectRoute,
   type SimpleToken,
-  type SwapQuote,
-  type SwapToken,
-  type SwapRoute,
   toRawAmount,
   validateSwapParams,
 } from "./SWAP_swap_logic";
@@ -53,7 +50,6 @@ export const SwapUI = ({}: SwapUIProps) => {
     setSelectedRouteIndex,
     isLoading,
     setIsLoading,
-    isLoadingTokens,
     setIsLoadingTokens,
     isDropdownOpenIn,
     setIsDropdownOpenIn,

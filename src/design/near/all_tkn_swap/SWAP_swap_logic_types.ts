@@ -1,5 +1,3 @@
-import * as near from "fastintear";
-
 export interface TokenMetadata {
   name: string;
   symbol: string;
