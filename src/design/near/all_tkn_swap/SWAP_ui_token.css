@@ -1,0 +1,66 @@
+.swap-input-group {
+    background-color: var(--background-color);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    position: relative; /* Ensure proper positioning context */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.swap-input-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--secondary-text-color);
+}
+
+.swap-token-selector {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--container-background);
+    cursor: pointer;
+    color: var(--text-color); /* Changed back to default text color for better visibility */
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.swap-token-selector:hover {
+    border-color: var(--swap-primary);
+    background-color: var(--background-color);
+}
+
+.token-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.token-icon-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.token-icon-fallback {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: var(--container-background);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}

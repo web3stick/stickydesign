@@ -1,0 +1,17 @@
+.swap-amount-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1.25rem;
+    background-color: var(--container-background);
+    color: var(--text-color);
+    box-sizing: border-box;
+}
+
+.swap-amount-value {
+    font-size: 0.875rem;
+    color: var(--secondary-text-color);
+    text-align: right;
+    margin-top: 0.25rem;
+}

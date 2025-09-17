@@ -1,5 +1,5 @@
 import { useEffect } from "preact/hooks";
-import "./SWAP_css.css";
+import "./SWAP_ui.css";
 import { TokenIcon } from "./SWAP_TokenIcon";
 import { ArrowDownUp } from "lucide-preact";
 import {
@@ -17,6 +17,10 @@ import {
 import { TokenDropdown } from "./SWAP_TokenDropdown";
 import { fetchAndStoreTokenList } from "./SWAP_token_list_db";
 import { useSwapStore } from "./swapStore";
+import { SwapMessages } from "./SWAP_ui_messages";
+import { SwapButtons } from "./SWAP_ui_buttons";
+import { SwapSettings } from "./SWAP_ui_settings";
+import { SwapRouteSelection } from "./SWAP_ui_route_selection";
 
 interface SwapUIProps {
   // accountId is now managed by the store, so we don't need it as a prop
@@ -403,8 +407,7 @@ export const SwapUI = ({}: SwapUIProps) => {
 
   return (
     <>
-      {error && <div className="swap-error">{error}</div>}
-      {success && <div className="swap-success">{success}</div>}
+      <SwapMessages error={error} success={success} />
 
       <div className="swap-form">
         <div className="swap-input-group">
@@ -589,76 +592,30 @@ export const SwapUI = ({}: SwapUIProps) => {
           </div>
         </div>
 
-        <div className="swap-settings">
-          <span className="swap-slippage-label">Slippage Tolerance</span>
-          <div>
-            <input
-              type="number"
-              className="swap-slippage-input"
-              value={slippage}
-              onChange={(e) =>
-                setSlippage(
-                  parseFloat((e.target as HTMLInputElement).value) || 1.0,
-                )
-              }
-              min="0.1"
-              max="50"
-              step="0.1"
-            />
-            <span>%</span>
-          </div>
-        </div>
+        <SwapSettings 
+          slippage={slippage}
+          setSlippage={setSlippage}
+        />
 
-        {/* Route selection */}
-        {quote && quote.availableRoutes && quote.availableRoutes.length > 1 && (
-          <div className="swap-route-selection">
-            <div className="swap-route-header">Select Route</div>
-            <div className="swap-route-options">
-              {quote.availableRoutes.map((route, index) => (
-                <div
-                  key={index}
-                  className={`swap-route-option ${
-                    selectedRouteIndex === index ? "selected" : ""
-                  }`}
-                  onClick={() => handleRouteSelect(index)}
-                >
-                  <div className="swap-route-info">
-                    {route.dex_id || "Unknown DEX"}
-                  </div>
-                  <div className="swap-route-details">
-                    <span className="swap-route-amount">
-                      {formatTokenAmount(
-                        route.estimated_amount?.amount_out || "0",
-                        selectedTokenOut?.metadata.decimals || 18,
-                      )}{" "}
-                      {selectedTokenOut?.displayName}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
+        <SwapRouteSelection 
+          quote={quote}
+          selectedRouteIndex={selectedRouteIndex}
+          handleRouteSelect={handleRouteSelect}
+          selectedTokenOut={selectedTokenOut}
+          formatTokenAmount={formatTokenAmount}
+        />
 
-        <button
-          type="button"
-          className="swap-button"
-          onClick={handleSwap}
-          disabled={
-            isLoading ||
-            isLoadingTokenIn ||
-            isLoadingTokenOut ||
-            !selectedTokenIn ||
-            !selectedTokenOut ||
-            !inputAmount ||
-            parseFloat(inputAmount) <= 0 ||
-            !quote ||
-            // Use accountId from the store instead of the prop
-            !accountId
-          }
-        >
-          {isLoading ? "Processing..." : `SWAP`}
-        </button>
+        <SwapButtons 
+          handleSwap={handleSwap}
+          isLoading={isLoading}
+          isLoadingTokenIn={isLoadingTokenIn}
+          isLoadingTokenOut={isLoadingTokenOut}
+          selectedTokenIn={selectedTokenIn}
+          selectedTokenOut={selectedTokenOut}
+          inputAmount={inputAmount}
+          quote={quote}
+          accountId={accountId}
+        />
       </div>
     </>
   );

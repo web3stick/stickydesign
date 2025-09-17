@@ -1,0 +1,19 @@
+.swap-settings {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--secondary-text-color);
+}
+
+.swap-slippage-input {
+    width: 60px; /* Make the input wider */
+    padding: 0.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    background-color: var(--container-background);
+    color: var(--text-color);
+    box-sizing: border-box;
+    text-align: center; /* Center the text */
+}

@@ -1,0 +1,53 @@
+:root {
+    --background-color: #f8f9fa;
+    --container-background: #fff;
+    --text-color: #212529;
+    --secondary-text-color: #6c757d;
+    --border-color: #e9ecef;
+    --accent-color: #007bff;
+    /* Using color variables from main color.css */
+    --color-green: #95D58D;
+    --color-purple: #C9A8F4;
+    --color-yellow: #FFF8A3;
+    --color-blue: #8CA2F5;
+    --color-red: #FF8A8A;
+    --color-orange: #FFC58A;
+    /* Additional custom colors for swap component */
+    --swap-primary: var(--color-blue);
+    --swap-secondary: var(--color-yellow);
+    --swap-accent: var(--color-green);
+}
+
+.swap-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+.swap-container {
+    background-color: var(--container-background);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--swap-secondary);
+}
+
+.swap-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.swap-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.swap-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

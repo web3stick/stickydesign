@@ -1,0 +1,26 @@
+.swap-arrow-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.swap-arrow-icon {
+    background-color: var(--container-background);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    position: relative;
+    z-index: 10;
+    color: var(--color-blue);
+    padding: 0;
+}
+
+.swap-arrow-icon:hover {
+    transform: scale(1.1);
+    color: var(--color-purple);
+}

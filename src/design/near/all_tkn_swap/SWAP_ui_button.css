@@ -1,0 +1,47 @@
+.swap-auth-button {
+    background-color: var(--color-blue);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%; /* Make it full width of its container */
+    margin-bottom: 1rem; /* Add some space below the button */
+}
+
+.swap-auth-button:hover:not(:disabled) {
+    background-color: var(--color-purple);
+}
+
+.swap-auth-button:disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+}
+
+.swap-button {
+    background-color: var(--swap-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.swap-button:hover:not(:disabled) {
+    background-color: var(--color-blue);
+    transform: translateY(-2px);
+}
+
+.swap-button:disabled {
+    background-color: var(--border-color);
+    cursor: not-allowed;
+    transform: none;
+}
