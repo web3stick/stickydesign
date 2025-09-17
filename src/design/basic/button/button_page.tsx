@@ -6,7 +6,6 @@ import "prismjs/themes/prism-okaidia.css";
 import "./button.css";
 import button_CSS from "./button.css?raw";
 import STICKY_button from "./button_componenet";
-import button_Component from "./button_componenet?raw";
 import { buttonExample } from "./button_code_example";
 
 // STICKY_design_button_page

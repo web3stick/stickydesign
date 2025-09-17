@@ -1,5 +1,8 @@
-/*STICKY_toggle_switch_container*/
-/*this css is only important if you have lables*/
+/* STICKY Toggle Switch Styles */
+/* These styles work for both the React component and plain HTML/CSS implementation */
+
+/* Container for toggle switch with labels */
+/* Only needed if you want to display labels */
 .STICKY_toggle_switch_container {
   display: flex;
   align-items: center;

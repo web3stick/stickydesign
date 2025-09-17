@@ -7,6 +7,7 @@ import toggleSwitchCSS from "./toggle_switch.css?raw";
 import STICKY_toggle_switch from "./toggle_switch_component";
 import toggleSwitchComponent from "./toggle_switch_component?raw";
 import { toggleSwitchExample } from "./toggle_switch_code_example";
+import { toggleSwitchHtmlExample } from "./toggle_switch_html_code_example";
 
 const STICKY_design_toggle_switch_page = () => {
   const [message, setMessage] = useState("");
@@ -79,6 +80,15 @@ const STICKY_design_toggle_switch_page = () => {
 
       <pre>
         <code className="language-js">{toggleSwitchExample}</code>
+      </pre>
+
+      <h2>HTML/CSS Only Version</h2>
+      <p>
+        If you prefer to use just HTML and CSS without any JavaScript framework, you can use this basic implementation:
+      </p>
+
+      <pre>
+        <code className="language-html">{toggleSwitchHtmlExample}</code>
       </pre>
 
       <h2>Component Code</h2>
