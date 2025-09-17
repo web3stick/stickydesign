@@ -12,6 +12,7 @@
 - [x] the token-dropdown-menu has siddeways scroll content too wide
 - [x] use custom token list, or create a custom favoirte list to have some tokens at the top.
 - [ ] refresh token balance after swap
+- [ ] when we swap token/input direction we are keeping the number they inputed but we need to get a fresh quote
 
 
 ---
