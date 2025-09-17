@@ -5,7 +5,7 @@ import { NEAR_ALL_TOKEN_Swap_FULL_COMPONENT } from './all_tkn_swap/SWAP_main';
 const STICKY_design_near_all_tkn_swap = () => {
   return (
     <section>
-      <h1>ALL TOKEN SWAP COMPONENT</h1>
+      <h1>TOKEN SWAP COMPONENT</h1>
       <NEAR_ALL_TOKEN_Swap_FULL_COMPONENT />
 
     </section>
