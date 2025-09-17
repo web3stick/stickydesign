@@ -23,9 +23,13 @@ export const NEAR_ALL_TOKEN_Swap_FULL_COMPONENT = () => {
   // Fetch metadata for top tokens when component mounts
   useEffect(() => {
     console.log("[SWAP_MAIN] Fetching metadata for top tokens");
-    fetchTopTokensMetadata().catch(error => {
-      console.error("[SWAP_MAIN] Failed to fetch top tokens metadata:", error);
-    });
+    fetchTopTokensMetadata()
+      .then(() => {
+        console.log("[SWAP_MAIN] Successfully fetched metadata for top tokens");
+      })
+      .catch(error => {
+        console.error("[SWAP_MAIN] Failed to fetch top tokens metadata:", error);
+      });
   }, []);
 
   // Simple key that changes on auth state to force complete re-render

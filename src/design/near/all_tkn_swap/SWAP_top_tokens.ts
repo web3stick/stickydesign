@@ -37,7 +37,7 @@ export function getTopTokenSymbol(contractId: string): string | undefined {
   return TOP_TOKEN_CONTRACTS[contractId];
 }
 
-// Function to fetch metadata for a token
+// Function to fetch metadata for a token with rate limiting
 async function fetchTokenMetadata(contractId: string): Promise<TokenMetadata> {
   // Return cached metadata if available
   if (tokenMetadataCache[contractId]) {
@@ -72,6 +72,20 @@ async function fetchTokenMetadata(contractId: string): Promise<TokenMetadata> {
       delete ongoingFetches[contractId];
       
       return metadata;
+    }).catch(error => {
+      console.error(`❌ Failed to fetch metadata for ${contractId}:`, error);
+      
+      // Clean up the ongoing fetch on error
+      delete ongoingFetches[contractId];
+      
+      // Return default metadata on error
+      const defaultMetadata: TokenMetadata = {
+        name: contractId,
+        symbol: contractId.split(".")[0].toUpperCase(),
+        decimals: 18,
+      };
+      tokenMetadataCache[contractId] = defaultMetadata;
+      return defaultMetadata;
     });
 
     return await ongoingFetches[contractId];
@@ -86,23 +100,36 @@ async function fetchTokenMetadata(contractId: string): Promise<TokenMetadata> {
       symbol: contractId.split(".")[0].toUpperCase(),
       decimals: 18,
     };
+    tokenMetadataCache[contractId] = defaultMetadata;
     return defaultMetadata;
   }
 }
 
-// Function to fetch metadata for all top tokens
+// Function to fetch metadata for all top tokens with rate limiting
 export async function fetchTopTokensMetadata(): Promise<Record<string, TokenMetadata>> {
   const topTokenIds = Object.values(TOP_TOKENS);
-  const metadataPromises = topTokenIds.map(contractId => 
-    fetchTokenMetadata(contractId).then(metadata => ({ contractId, metadata }))
-  );
-  
-  const results = await Promise.all(metadataPromises);
-  
   const metadataMap: Record<string, TokenMetadata> = {};
-  results.forEach(({ contractId, metadata }) => {
-    metadataMap[contractId] = metadata;
-  });
+  
+  // Process tokens in smaller batches to avoid overwhelming the RPC
+  const batchSize = 3; // Process 3 tokens at a time
+  const delayBetweenBatches = 100; // 100ms delay between batches
+  
+  for (let i = 0; i < topTokenIds.length; i += batchSize) {
+    const batch = topTokenIds.slice(i, i + batchSize);
+    const metadataPromises = batch.map(contractId => 
+      fetchTokenMetadata(contractId).then(metadata => ({ contractId, metadata }))
+    );
+    
+    const results = await Promise.all(metadataPromises);
+    results.forEach(({ contractId, metadata }) => {
+      metadataMap[contractId] = metadata;
+    });
+    
+    // Add delay between batches (except for the last batch)
+    if (i + batchSize < topTokenIds.length) {
+      await new Promise(resolve => setTimeout(resolve, delayBetweenBatches));
+    }
+  }
   
   return metadataMap;
 }
