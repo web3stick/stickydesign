@@ -1,7 +1,7 @@
 import { ROUTES } from "../ts/routes";
-import "../css/nav_section.css";
+
 import NEAR_AUTH_BUTTON from "./near/auth_button/near_auth_button";
-import { NEAR_ALL_TOKEN_Swap_FULL_COMPONENT } from "./near/all_tkn_swap/SWAP_main";
+import { ArrowDownUp, LogIn } from "lucide-preact";
 
 // STICKY_design_nav_section
 const STICKY_design_nav_section = () => {
@@ -28,7 +28,7 @@ const STICKY_design_nav_section = () => {
       <a href={ROUTES.near_all_swap.path} class="card-link">
         <div class="card">
           <div class="preview-container">
-            <NEAR_ALL_TOKEN_Swap_FULL_COMPONENT />
+            <ArrowDownUp />
           </div>
           <div class="label-container">{ROUTES.near_all_swap.label}</div>
         </div>
