@@ -5,7 +5,7 @@
 - [ ] make sure code is clean and type safe
 - [ ] keep conslo logging clean
 - [ ] create doc on how to reuse
-- [ ] advanced state mangaent do we need it? it works so why chage it.
+- [x] advanced state mangaent do we need it? it works so why chage it.
 - [x] use lucide iocn "ArrowDownUp"
 - [ ] clean up old code/css
 - [x] maybe get the token icon directly form the token list, would not work
