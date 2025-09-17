@@ -1,5 +1,5 @@
 # stickydesign
-🟨 design system for sticky
+🟨 design system and reusable components for sticky
 
 
 ```sh
