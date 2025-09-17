@@ -40,7 +40,7 @@ const STICKY_design_nav_section = () => {
         <a href={ROUTES.toggle_switch.path} class="card-link">
           <div class="card">
             <div class="preview-container">
-              <STICKY_toggle_switch leftText="OFF" rightText="ON" />
+              <STICKY_toggle_switch/>
             </div>
             <div class="label-container">{ROUTES.toggle_switch.label}</div>
           </div>

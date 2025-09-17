@@ -9,10 +9,7 @@ import toggleSwitchComponent from "./toggle_switch_component?raw";
 import { toggleSwitchExample } from "./toggle_switch_code_example";
 
 const STICKY_design_toggle_switch_page = () => {
-  const [defaultMessage, setDefaultMessage] = useState("");
-  const [initialOnMessage, setInitialOnMessage] = useState("");
-  const [customMessage, setCustomMessage] = useState("");
-  const [noLabelMessage, setNoLabelMessage] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     Prism.highlightAll();
@@ -29,20 +26,18 @@ const STICKY_design_toggle_switch_page = () => {
             <h3>Default Toggle</h3>
             <STICKY_toggle_switch onToggle={(isToggled) => {
               const msg = isToggled ? "Toggled On" : "Toggled Off";
-              setDefaultMessage(msg);
+              setMessage(msg);
               console.log(msg);
             }} />
-            {defaultMessage && <p>Message: {defaultMessage}</p>}
           </div>
 
           <div>
             <h3>Initially On</h3>
             <STICKY_toggle_switch initialState={true} onToggle={(isToggled) => {
               const msg = isToggled ? "Initially On" : "Switched Off";
-              setInitialOnMessage(msg);
+              setMessage(msg);
               console.log(msg);
             }} />
-            {initialOnMessage && <p>Message: {initialOnMessage}</p>}
           </div>
 
           <div>
@@ -52,11 +47,10 @@ const STICKY_design_toggle_switch_page = () => {
               rightText="web4" 
               onToggle={(isToggled) => {
                 const msg = isToggled ? "web4 activated" : "web3 activated";
-                setCustomMessage(msg);
+                setMessage(msg);
                 console.log(msg);
               }} 
             />
-            {customMessage && <p>Message: {customMessage}</p>}
           </div>
 
           <div>
@@ -64,13 +58,16 @@ const STICKY_design_toggle_switch_page = () => {
             <STICKY_toggle_switch 
               onToggle={(isToggled) => {
                 const msg = isToggled ? "Switched On" : "Switched Off";
-                setNoLabelMessage(msg);
+                setMessage(msg);
                 console.log(msg);
               }} 
             />
-            {noLabelMessage && <p>Message: {noLabelMessage}</p>}
           </div>
         </div>
+      </div>
+
+      <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+        {message && <p>Message: {message}</p>}
       </div>
 
       <h2>How to Reuse</h2>
