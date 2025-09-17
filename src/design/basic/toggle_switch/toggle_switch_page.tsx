@@ -9,32 +9,60 @@ import toggleSwitchComponent from "./toggle_switch_component?raw";
 import { toggleSwitchExample } from "./toggle_switch_code_example";
 
 const STICKY_design_toggle_switch_page = () => {
-  const [toggleMessage, setToggleMessage] = useState("");
+  const [defaultMessage, setDefaultMessage] = useState("");
+  const [initialOnMessage, setInitialOnMessage] = useState("");
+  const [customMessage, setCustomMessage] = useState("");
 
   useEffect(() => {
     Prism.highlightAll();
   }, []);
 
-  const handleToggle = (isToggled: boolean) => {
-    const message = isToggled ? "Toggled On" : "Toggled Off";
-    setToggleMessage(message);
-    console.log(message);
-  };
-
   return (
     <section>
       <h1>STICKY_toggle_switch</h1>
-      <p>Toggle switch for sticky</p>
+      <p>Toggle switch component for sticky design system</p>
 
-      {/* STICKY_toggle_switch */}
-      <STICKY_toggle_switch leftText="Off" rightText="On" onToggle={handleToggle} />
-      
-      {toggleMessage && <p>Message: {toggleMessage}</p>}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
+          <div>
+            <h3>Default Toggle</h3>
+            <STICKY_toggle_switch onToggle={(isToggled) => {
+              const msg = isToggled ? "Toggled On" : "Toggled Off";
+              setDefaultMessage(msg);
+              console.log(msg);
+            }} />
+            {defaultMessage && <p>Message: {defaultMessage}</p>}
+          </div>
+
+          <div>
+            <h3>Initially On</h3>
+            <STICKY_toggle_switch initialState={true} onToggle={(isToggled) => {
+              const msg = isToggled ? "Initially On" : "Switched Off";
+              setInitialOnMessage(msg);
+              console.log(msg);
+            }} />
+            {initialOnMessage && <p>Message: {initialOnMessage}</p>}
+          </div>
+
+          <div>
+            <h3>Custom Labels</h3>
+            <STICKY_toggle_switch 
+              leftText="web3" 
+              rightText="web4" 
+              onToggle={(isToggled) => {
+                const msg = isToggled ? "web4 activated" : "web3 activated";
+                setCustomMessage(msg);
+                console.log(msg);
+              }} 
+            />
+            {customMessage && <p>Message: {customMessage}</p>}
+          </div>
+        </div>
+      </div>
 
       <h2>How to Reuse</h2>
       <p>
         The STICKY_toggle_switch component can be easily reused throughout your application.
-        <br />
         Simply import it and pass the desired props:
       </p>
 
