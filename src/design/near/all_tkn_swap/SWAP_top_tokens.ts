@@ -13,7 +13,8 @@ export const TOP_TOKENS: Record<string, string> = {
   PUMP: "token.pumpopoly.near",
   STNEAR: "meta-pool.near",
   JAMBO: "jambo-1679.meme-cooking.near",
-  XPOST: "xpost-1634.meme-cooking.near"
+  XPOST: "xpost-1634.meme-cooking.near",
+  DOGSHIT: "dogshit-1408.meme-cooking.near"
 };
 
 // Create a reverse mapping for easier lookup
