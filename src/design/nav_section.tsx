@@ -1,22 +1,28 @@
 import { ROUTES } from "../ts/routes";
 
 import NEAR_AUTH_BUTTON from "./near/auth_button/near_auth_button";
-import { ArrowDownUp, LogIn } from "lucide-preact";
+import { ArrowDownUp, LogIn, Palette } from "lucide-preact";
 
 // STICKY_design_nav_section
 const STICKY_design_nav_section = () => {
   return (
     <section class="nav_section">
       <h4>STICKY_design_nav_section</h4>
-      <p>
-        basic
-        <br />
-        <a href={ROUTES.color.path}>{ROUTES.color.label}</a>
+        {/*basic*/}
+        basic <br/>
+        <a href={ROUTES.color.path} class="card-link">
+          <div class="card">
+            <div class="preview-container">
+              <Palette />
+            </div>
+            <div class="label-container">{ROUTES.color.label}</div>
+          </div>
+        </a>
         <br />
         <a href={ROUTES.button.path}>{ROUTES.button.label}</a>
         <br />
-        near
-      </p>
+        {/*near*/}
+        near <br/>
       <a href={ROUTES.near_auth_button.path} class="card-link">
         <div class="card">
           <div class="preview-container">

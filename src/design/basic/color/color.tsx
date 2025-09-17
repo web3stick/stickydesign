@@ -4,7 +4,7 @@ import "prismjs/themes/prism-okaidia.css";
 
 // import css
 import "./color.css";
-import color_CSS from "../../css/color.css?raw";
+import color_CSS from "../../../css/color.css?raw";
 
 const STICKY_design_color = () => {
   
