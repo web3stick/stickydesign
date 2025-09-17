@@ -6,8 +6,8 @@ import "prismjs/themes/prism-okaidia.css";
 import "./button.css";
 import button_CSS from "./button.css?raw";
 
-// STICKY_design_button
-const STICKY_design_button = () => {
+// STICKY_design_button_page
+const STICKY_design_button_page = () => {
   useEffect(() => {
     Prism.highlightAll();
   }, []);
@@ -28,4 +28,4 @@ const STICKY_design_button = () => {
   );
 };
 
-export default STICKY_design_button;
+export default STICKY_design_button_page;
